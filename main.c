@@ -83,7 +83,7 @@ int	render(t_data *data)
 {
 	// If window has been destroyed, we don't want to put the pixel!
 	if (data->win_ptr)
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_HEIGHT / 2, WINDOW_WIDTH /2, RED_PIXEL);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_WIDTH / 2,  WINDOW_HEIGHT / 2, RED_PIXEL); // Guide switches width with height
 	return (0);
 }
 
