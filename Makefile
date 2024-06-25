@@ -17,11 +17,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	cd mlx_linux && $(MAKE)
-	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 #$(NAME): $(OBJ)
 #	cd printf && $(MAKE)
@@ -47,9 +47,13 @@ fclean: clean
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: $(OBJ)
-	cd printf && $(MAKE)
-	cd libft && $(MAKE) debug
-	$(CC) -g $(CFLAGS) $(OBJ) $(MINILIBX) -o $(NAME)
+	cd mlx_linux && $(MAKE)
+	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+
+# debug: $(OBJ)
+# 	cd printf && $(MAKE)
+# 	cd libft && $(MAKE) debug
+# 	$(CC) -g $(CFLAGS) $(OBJ) $(MINILIBX) -o $(NAME)
 # $(CC) -g $(CFLAGS) $(OBJ) $(PRINTF) $(LIBFT) -o $(NAME)
 
 re: fclean all
