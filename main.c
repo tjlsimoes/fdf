@@ -382,7 +382,7 @@
 # define RED_PIXEL 0xFF0000
 # define WHITE_PIXEL 0x000000
 
-typedef struct s_img
+typedef struct s_img_alt
 {
 	void	*mlx_img;
 	char	*addr;
@@ -420,60 +420,6 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-int	render_rect(t_data *data, t_rect rect)
-{
-	int	i;
-	int	j;
-
-	if (!data->win_ptr)
-		return (1);
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, rect.color);
-		i++;
-	}
-	return (0);
-}
-
-void 	render_background(t_data *data, int color)
-{
-	int	i;
-	int	j;
-
-	if (!data->win_ptr)
-		return ;
-	i = 0;
-	while (i < WINDOW_HEIGHT)
-	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, color);
-		i++;
-	}
-}
-
-int	render(t_data * data)
-{
-	render_background(data, WHITE_PIXEL);
-	render_rect(data, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
-	render_rect(data, (t_rect){0, 0, 100, 100, RED_PIXEL});
-	return (0);
-}
-
-// (t_rect){} is a compund literal. Since C99, this is a way to initialize structures
-// without having to manually assign each member. Above: passing a structure by value.
-
-// void	img_pix_put(t_img_alt *img, int x, int y, int color)
-// {
-// 	char	*pixel;
-
-// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 	*(int *)pixel = color;
-// }
-
 void	img_pix_put(t_img_alt *img, int x, int y, int color)
 {
     char    *pixel;
@@ -492,6 +438,60 @@ void	img_pix_put(t_img_alt *img, int x, int y, int color)
         i -= 8;
     }
 }
+
+int	render_rect(t_img_alt *img, t_rect rect)
+{
+	int	i;
+	int	j;
+
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			img_pix_put(img, j++, i, rect.color);
+		i++;
+	}
+	return (0);
+}
+
+void 	render_background(t_img_alt *img, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+			img_pix_put(img, j++, i, color);
+		i++;
+	}
+}
+
+int	render(t_data * data)
+{
+	if (!data->win_ptr)
+		return (1);
+	render_background(&data->img, WHITE_PIXEL);
+	render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
+	render_rect(&data->img, (t_rect){0, 0, 100, 100, RED_PIXEL});
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0, 0);
+	return (0);
+}
+
+// (t_rect){} is a compund literal. Since C99, this is a way to initialize structures
+// without having to manually assign each member. Above: passing a structure by value.
+
+// void	img_pix_put(t_img_alt *img, int x, int y, int color)
+// {
+// 	char	*pixel;
+
+// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	*(int *)pixel = color;
+// }
 
 int	main(void)
 {
