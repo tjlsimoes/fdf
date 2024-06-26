@@ -582,6 +582,7 @@
 // 	mlx_loop(data.mlx_ptr);
 
 // 	// Loop will be exited if there's no window left and execute following code
+// 	mlx_destroy_display(data.mlx_ptr);
 // 	free(data.mlx_ptr);
 // 	return (0);
 // }
