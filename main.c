@@ -1,22 +1,21 @@
-#include "./mlx.h"
-#include "./mlx_int.h"
-#include "X11/X.h"
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
+/*   Updated: 2024/07/23 11:56:47 by tjorge-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+#include "fdf.h"
 
-typedef struct	s_data
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-} t_data;
-
-int	handle_keypress(int keysym, t_data *data)
+int	handle_keypress(int keysym, t_fdf *env)
 {
     if (keysym == XK_Escape)
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+        mlx_destroy_window(env->mlx, env->win);
 
     printf("Keypress: %d\n", keysym);
     return (0);
@@ -35,35 +34,35 @@ int	handle_no_event()
 }
 
 
-int	destroy_window(t_data *data)
+int	destroy_window(t_fdf *env)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_window(env->mlx, env->win);
 	return (0);
 }
 
 int	main(void)
 {
-	t_data	data;
+	t_fdf	env;
 
-	data.mlx_ptr = mlx_init();
-	if (!data.mlx_ptr)
+	env.mlx = mlx_init();
+	if (!env.mlx)
 		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
-	if (!data.win_ptr)
+	env.win = mlx_new_window(env.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
+	if (!env.win)
 	{
-		mlx_destroy_display(data.mlx_ptr);
-		free(data.mlx_ptr);
+		mlx_destroy_display(env.mlx);
+		free(env.mlx);
 		return (1);
 	}
 
-	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
-	mlx_hook(data.win_ptr, DestroyNotify, 0, destroy_window, &data);
-	mlx_mouse_hook(data.win_ptr, handle_mouse_click, &data);
+	mlx_loop_hook(env.mlx, &handle_no_event, &env);
+	mlx_hook(env.win, KeyPress, KeyPressMask, handle_keypress, &env);
+	mlx_hook(env.win, DestroyNotify, 0, destroy_window, &env);
+	mlx_mouse_hook(env.win, handle_mouse_click, &env);
 
-	mlx_loop(data.mlx_ptr);
+	mlx_loop(env.mlx);
 
-    mlx_destroy_display(data.mlx_ptr);
-    free(data.mlx_ptr);
+    mlx_destroy_display(env.mlx);
+    free(env.mlx);
 	return (0);
 }
