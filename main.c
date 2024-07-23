@@ -22,6 +22,12 @@ int	handle_keypress(int keysym, t_data *data)
     return (0);
 }
 
+int	handle_mouse_click(int button, int x, int y)
+{
+    printf("Mouse click: %d, %d %d\n", button, x, y);
+    return (0);
+}
+
 int	handle_no_event()
 {
 	// Useless function for now in need of existing.
@@ -45,6 +51,7 @@ int	main(void)
 
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
+	mlx_mouse_hook(data.win_ptr, handle_mouse_click, &data);
 
 	mlx_loop(data.mlx_ptr);
 
