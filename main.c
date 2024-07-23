@@ -30,7 +30,14 @@ int	handle_mouse_click(int button, int x, int y)
 
 int	handle_no_event()
 {
-	// Useless function for now in need of existing.
+	// Useless function needed for no event case.
+	return (0);
+}
+
+
+int	destroy_window(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	return (0);
 }
 
@@ -51,6 +58,7 @@ int	main(void)
 
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
+	mlx_hook(data.win_ptr, DestroyNotify, 0, destroy_window, &data);
 	mlx_mouse_hook(data.win_ptr, handle_mouse_click, &data);
 
 	mlx_loop(data.mlx_ptr);
