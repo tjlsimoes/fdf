@@ -38,19 +38,30 @@ t_fdf	*initialize_env(char *str)
 	t_fdf	*env;
 	char	*title;
 
-	title = ft_strjoin(ft_strdup("FDF - "), str);
-	if (!title)
-		ft_error("Unable to allocate memory for title.", 1);
-	env = (t_fdf *)malloc(sizeof(t_fdf));
+	env = (t_fdf *)ft_calloc(1, sizeof(t_fdf));
+	if (!env)
+		ft_error("Unable to allocate memory for env variable.", 1);
 	env->mlx = mlx_init();
 	if (!env->mlx)
+	{
+		free(env);
 		ft_error("Unable to create display.", 1);
+	}
+	title = ft_strjoin(ft_strdup("FDF - "), str);
+	if (!title)
+	{
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		free(env);
+		ft_error("Unable to allocate memory for title.", 1);
+	}
 	env->win = mlx_new_window(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, title);
 	free(title);
 	if (!env->win)
 	{
 		mlx_destroy_display(env->mlx);
 		free(env->mlx);
+		free(env);
 		ft_error("Unable to create window.", 1);
 	}
 	env->map = NULL;
