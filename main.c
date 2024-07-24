@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/24 12:24:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:35:23 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ t_fdf	*initialize_env(char *str)
 	env->map = NULL;
 	return (env);
 }
+
+// t_fdf	*initialize_map(t_fdf *env)
+// {
+// 	env->map = (t_map *)ft_calloc(1, sizeof(t_map));
+// 	if (!env->map)
+		
+// }
 
 int	main(int argc, char **argv)
 {
