@@ -6,13 +6,15 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/23 11:54:17 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:08:45 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "libft/libft.h"
+# include "printf/ft_printf.h"
 # include "./mlx.h"
 # include "./mlx_int.h"
 # include "X11/X.h"
@@ -35,5 +37,9 @@ typedef struct s_fdf
 	void	*win;
 	t_map	*map;		
 }	t_fdf;
+
+int	handle_no_event();
+int	handle_mouse_click(int button, int x, int y);
+int	handle_keypress(int keysym, t_fdf *env);
 
 #endif

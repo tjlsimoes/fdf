@@ -9,7 +9,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 DEBUG_FLAGS = -g
 
-SRC := main.c
+SRC := main.c hooks.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)
