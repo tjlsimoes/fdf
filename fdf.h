@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/24 10:08:45 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:28:23 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ typedef struct s_fdf
 	t_map	*map;		
 }	t_fdf;
 
-int	handle_no_event();
-int	handle_mouse_click(int button, int x, int y);
-int	handle_keypress(int keysym, t_fdf *env);
+
+void	ft_error(char *error_msg, int sys_error);
+
+t_fdf	*initialize_env(char *str);
+
+int		close_window(t_fdf *env);
+
+void	set_hooks(t_fdf *env);
+int		handle_no_event();
+int		handle_mouse_click(int button, int x, int y);
+int		handle_keypress(int keysym, t_fdf *env);
 
 #endif
