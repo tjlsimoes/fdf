@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/24 11:28:23 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:24:32 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ typedef struct s_fdf
 
 
 void	ft_error(char *error_msg, int sys_error);
+void	free_display_env(t_fdf *env);
 
 t_fdf	*initialize_env(char *str);
+char	*set_title(t_fdf *env, char *str);
 
 int		close_window(t_fdf *env);
 

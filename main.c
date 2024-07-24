@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/24 11:29:45 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/24 12:24:56 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int	close_window(t_fdf *env)
 	exit(0);
 }
 
+void	free_display_env(t_fdf *env)
+{
+	mlx_destroy_display(env->mlx);
+	free(env->mlx);
+	free(env);
+}
+
 void	ft_error(char *error_msg, int sys_error)
 {
 	if (!sys_error)
@@ -31,6 +38,19 @@ void	ft_error(char *error_msg, int sys_error)
 	else
 		perror(error_msg);
 	exit(1);
+}
+
+char	*set_title(t_fdf *env, char *str)
+{
+	char	*title;
+
+	title = ft_strjoin(ft_strdup("FDF - "), str);
+	if (!title)
+	{
+		free_display_env(env);
+		ft_error("Unable to allocate memory for title.", 1);
+	}
+	return (title);
 }
 
 t_fdf	*initialize_env(char *str)
@@ -47,21 +67,12 @@ t_fdf	*initialize_env(char *str)
 		free(env);
 		ft_error("Unable to create display.", 1);
 	}
-	title = ft_strjoin(ft_strdup("FDF - "), str);
-	if (!title)
-	{
-		mlx_destroy_display(env->mlx);
-		free(env->mlx);
-		free(env);
-		ft_error("Unable to allocate memory for title.", 1);
-	}
+	title = set_title(env, str);
 	env->win = mlx_new_window(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, title);
 	free(title);
 	if (!env->win)
 	{
-		mlx_destroy_display(env->mlx);
-		free(env->mlx);
-		free(env);
+		free_display_env(env);
 		ft_error("Unable to create window.", 1);
 	}
 	env->map = NULL;
