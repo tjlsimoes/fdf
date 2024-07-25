@@ -89,13 +89,6 @@ t_fdf	*initialize_env(char *str)
 	return (env);
 }
 
-// t_fdf	*initialize_map(t_fdf *env)
-// {
-// 	env->map = (t_map *)ft_calloc(1, sizeof(t_map));
-// 	if (!env->map)
-		
-// }
-
 int	main(int argc, char **argv)
 {
 	t_fdf	*env;
@@ -103,6 +96,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		env = initialize_env(argv[1]);
+		initialize_map(env, argv[1]);
 
 		set_hooks(env);
 		mlx_loop(env->mlx);
