@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/24 12:35:23 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/25 11:22:12 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ int	close_window(t_fdf *env)
 	free(env->map);
 	free(env);
 	exit(0);
+}
+
+void	error_close_window(t_fdf *env, char *error_msg, int sys_error)
+{
+	mlx_destroy_window(env->mlx, env->win);
+	mlx_destroy_display(env->mlx);
+	free(env->mlx);
+	free(env->map);
+	free(env);
+	ft_error(error_msg, sys_error);
 }
 
 void	free_display_env(t_fdf *env)
