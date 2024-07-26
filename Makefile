@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/26 18:01:17 by tjorge-l          #+#    #+#              #
+#    Updated: 2024/07/26 18:01:18 by tjorge-l         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME := fdf
 
 LIBFT := libft/libft.a
@@ -23,7 +35,7 @@ $(NAME): $(OBJ)
 
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -c $< -o $@
 
 clean:
 	cd mlx_linux && $(MAKE) clean
