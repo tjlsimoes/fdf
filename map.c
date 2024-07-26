@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/26 18:03:49 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:31:06 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,51 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
+void	initialize_map_array(t_fdf *env, char *file_path)
+{
+	int		file_fd;
+	char 	*line;
+	int		height;
+	int		i;
+
+	i = 0;
+	height = env->map->height;
+	file_fd = open(file_path, O_RDONLY);
+	if (!file_fd)
+		error_close_window(env, "Unable to open file.", 1);
+
+	env->map->array = (int ***)malloc(sizeof(int **) * env->map->height);
+	if (!env->map->array)
+		error_close_window(env, "Unable to allocate memory for map array.", 1);
+
+	line = get_next_line(file_fd);
+	i = 0;
+	while (i <= height)
+	{
+		env->map->array[i] = (int **)malloc(sizeof(int *) * env->map->width);
+		if (!env->map->array[i])
+			ft_printf("Need function to free array completely in all its dimensions!");
+		// Function to insert every number and its possibly associated colour into the array.
+		free(line);
+		line = NULL;
+		line = get_next_line(file_fd);
+		i++;
+	}
+	free(line);
+	line = NULL;
+	if (close(file_fd) < 0) //
+		error_close_window(env, "Unable to close file.", 1);
+
+
+}
+
 void	initialize_map(t_fdf *env, char *file_path)
 {
-	
 	env->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!env->map)
 		error_close_window(env, "Unable to allocate memory for map variable.", 1);
 	set_map_height(env, file_path);
 	set_map_width(env, file_path);
-
 	error_close_window(env, "Mem leak check", 1);
 		
 }
