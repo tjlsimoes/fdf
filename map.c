@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/26 17:45:36 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:03:49 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,32 @@ int	get_nbr_substrings(char const *s, char c)
 	return (count);
 }
 
+void	check_const_width(t_fdf *env, char *line, int file_fd, int width)
+{
+	int	difference_q;
+	int nbr_columns;
+
+	difference_q = 0;
+	while (line)
+	{
+		free(line);
+		line = NULL;
+		line = get_next_line(file_fd);
+		nbr_columns = get_nbr_substrings(line, ' ') - 1;
+		if (width != nbr_columns && nbr_columns != - 1)
+			difference_q = 1;
+	}
+	free(line);
+	line = NULL;
+	if (difference_q)
+		error_close_window(env, "Invalid map: lines with unequal width.", 1);
+}
+
+// What would happen if:
+//	a) map with nothing is passed.
+//	b) map with new line is passed.
+//	c) map with regular lines with one in the middle with just a new line.
+
 void	set_map_width(t_fdf *env, char *file_path)
 {
 	int		file_fd;
@@ -79,14 +105,7 @@ void	set_map_width(t_fdf *env, char *file_path)
 	line = get_next_line(file_fd);
 	width = get_nbr_substrings(line, ' ');
 	width--;
-	while (line)
-	{
-		free(line);
-		line = NULL;
-		line = get_next_line(file_fd);
-	}
-	free(line);
-	line = NULL;
+	check_const_width(env, line, file_fd, width);
 	if (close(file_fd) < 0)
 		error_close_window(env, "Unable to close file.", 1);
 	else if (width == 0)

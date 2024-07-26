@@ -51,6 +51,7 @@ char	*set_title(t_fdf *env, char *str);
 void	initialize_map(t_fdf *env, char *file_path);
 void	set_map_height(t_fdf *env, char *file_path);
 int		get_nbr_substrings(char const *s, char c);
+void	check_const_width(t_fdf *env, char *line, int file_fd, int width);
 void	set_map_width(t_fdf *env, char *file_path);
 
 
