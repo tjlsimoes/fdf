@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/25 11:53:22 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:45:36 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_map_height(t_fdf *env, char *file_path)
 	env->map->height = height;
 }
 
-static int	get_nbr_substrings(char const *s, char c)
+int	get_nbr_substrings(char const *s, char c)
 {
 	int		i;
 	int		k;
@@ -48,6 +48,8 @@ static int	get_nbr_substrings(char const *s, char c)
 	i = 0;
 	k = -1;
 	count = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
 		if (s[i] == c && k > 0)

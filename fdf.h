@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/25 11:24:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:29:18 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*set_title(t_fdf *env, char *str);
 
 void	initialize_map(t_fdf *env, char *file_path);
 void	set_map_height(t_fdf *env, char *file_path);
+int		get_nbr_substrings(char const *s, char c);
 void	set_map_width(t_fdf *env, char *file_path);
 
 
