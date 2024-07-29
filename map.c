@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/26 18:31:06 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:44:31 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,59 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
+void	initialize_map_array_cell(int **row, char *line, int width)
+{
+	char	**values;
+	int		i;
+
+	i = 0;
+	values = ft_split(line, ' ');
+	while (i < width)
+	{
+		row[i][0] = ft_atoi(values[i]);
+		// Shouldn't there be a safeguard here in case
+		// ft_atoi(values[i]) returns the default 0?
+		if (ft_strchr(line, ','))
+			row[i][1] = ft_atoi(ft_strchr(line, ',') + 1);
+			// Safeguard for possibility of 
+			// ft_atoi(ft_strchr(line, ',') + 1) == 0
+		// else
+			// Set default colour?
+		free(values[i]);
+		i++;
+	}
+	free(values);
+}
+
+void	free_map_array(t_fdf *env, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(env->map->array[j]);
+		j++;
+	}
+	free(env->map->array);
+}
+
+// free_map_array() is assuming that there's only a need
+// to free array rows up to i and not including i. As from
+// it is being called precisely when row i mem alloc fails.
+
+void	free_gnl_static(char *line, int file_fd)
+{
+	while (line)
+	{
+		free(line);
+		line = NULL;
+		line = get_next_line(file_fd);
+	}
+	free(line);
+	line = NULL;
+}
+
 void	initialize_map_array(t_fdf *env, char *file_path)
 {
 	int		file_fd;
@@ -144,9 +197,15 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 	while (i <= height)
 	{
 		env->map->array[i] = (int **)malloc(sizeof(int *) * env->map->width);
-		if (!env->map->array[i])
-			ft_printf("Need function to free array completely in all its dimensions!");
-		// Function to insert every number and its possibly associated colour into the array.
+		if (env->map->array[i])
+		{
+			free_map_array(env, i);			
+			free_gnl_static(line, file_fd);
+			if (close(file_fd) < 0)
+				error_close_window(env, "Unable to allocate memory for map array row and close file.", 1);
+			error_close_window(env, "Unable to allocate memory for map array row", 1);
+		}
+		initialize_map_array_cell(env->map->array[i], line, env->map->width);
 		free(line);
 		line = NULL;
 		line = get_next_line(file_fd);
@@ -156,8 +215,6 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 	line = NULL;
 	if (close(file_fd) < 0) //
 		error_close_window(env, "Unable to close file.", 1);
-
-
 }
 
 void	initialize_map(t_fdf *env, char *file_path)
@@ -167,6 +224,8 @@ void	initialize_map(t_fdf *env, char *file_path)
 		error_close_window(env, "Unable to allocate memory for map variable.", 1);
 	set_map_height(env, file_path);
 	set_map_width(env, file_path);
+	initialize_map_array(env, file_path);
+
 	error_close_window(env, "Mem leak check", 1);
 		
 }

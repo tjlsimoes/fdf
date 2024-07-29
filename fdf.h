@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/26 18:08:37 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:38:39 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_fdf
 void	ft_error(char *error_msg, int sys_error);
 void	error_close_window(t_fdf *env, char *error_msg, int sys_error);
 void	free_display_env(t_fdf *env);
+void	free_map_array(t_fdf *env, int i);
+void	free_gnl_static(char *line, int file_fd);
 
 int		close_window(t_fdf *env);
 
@@ -49,6 +51,9 @@ t_fdf	*initialize_env(char *str);
 char	*set_title(t_fdf *env, char *str);
 
 void	initialize_map(t_fdf *env, char *file_path);
+void	initialize_map_array(t_fdf *env, char *file_path);
+void	initialize_map_array_cell(int **row, char *line, int width);
+
 void	set_map_height(t_fdf *env, char *file_path);
 int		get_nbr_substrings(char const *s, char c);
 void	check_const_width(t_fdf *env, char *line, int file_fd, int width);
