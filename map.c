@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/29 10:44:31 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:03:13 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,31 @@
 
 void	set_map_height(t_fdf *env, char *file_path)
 {
-	int		file_fd;
 	int		height;
 	char 	*line;
 
-	file_fd = open(file_path, O_RDONLY);
-	if (!file_fd)
+	env->file_fd = open(file_path, O_RDONLY);
+	if (!env->file_fd)
 		error_close_window(env, "Unable to open file.", 1);
 	height = 0;
-	line = get_next_line(file_fd);
+	line = get_next_line(env->file_fd);
 	while (line)
 	{
 		free(line);
 		line = NULL;
-		line = get_next_line(file_fd);
+		line = get_next_line(env->file_fd);
 		height++;
 	}
 	free(line);
 	line = NULL;
-	if (close(file_fd) < 0)
+	if (close(env->file_fd) < 0)
 		error_close_window(env, "Unable to close file.", 1);
 	else if (height == 0)
 		error_close_window(env, "Invalid map: zero height.", 1);
 	env->map->height = height;
 }
+
+// Possible combination of both errors on set_map_height?
 
 int	get_nbr_substrings(char const *s, char c)
 {
@@ -66,7 +67,7 @@ int	get_nbr_substrings(char const *s, char c)
 	return (count);
 }
 
-void	check_const_width(t_fdf *env, char *line, int file_fd, int width)
+void	check_const_width(t_fdf *env, char *line, int width)
 {
 	int	difference_q;
 	int nbr_columns;
@@ -76,7 +77,7 @@ void	check_const_width(t_fdf *env, char *line, int file_fd, int width)
 	{
 		free(line);
 		line = NULL;
-		line = get_next_line(file_fd);
+		line = get_next_line(env->file_fd);
 		nbr_columns = get_nbr_substrings(line, ' ') - 1;
 		if (width != nbr_columns && nbr_columns != - 1)
 			difference_q = 1;
@@ -94,24 +95,25 @@ void	check_const_width(t_fdf *env, char *line, int file_fd, int width)
 
 void	set_map_width(t_fdf *env, char *file_path)
 {
-	int		file_fd;
 	int		width;
 	char 	*line;
 
-	file_fd = open(file_path, O_RDONLY);
-	if (!file_fd)
+	env->file_fd = open(file_path, O_RDONLY);
+	if (!env->file_fd)
 		error_close_window(env, "Unable to open file.", 1);
 	width = 0;
-	line = get_next_line(file_fd);
+	line = get_next_line(env->file_fd);
 	width = get_nbr_substrings(line, ' ');
 	width--;
-	check_const_width(env, line, file_fd, width);
-	if (close(file_fd) < 0)
+	check_const_width(env, line, width);
+	if (close(env->file_fd) < 0)
 		error_close_window(env, "Unable to close file.", 1);
 	else if (width == 0)
 		error_close_window(env, "Invalid map: zero width initial line.", 1);
 	env->map->width = width;
 }
+
+// Possible combination of both errors on set_map_height?
 
 // get_map_width() assumes that anything other than spaces between spaces
 // on the first line of the map equates to a number.
@@ -122,41 +124,36 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
-void	initialize_map_array_cell(int **row, char *line, int width)
+void	free_map_array_width(t_fdf *env, int i, int width)
 {
-	char	**values;
-	int		i;
+	int	j;
+	int	k;
 
-	i = 0;
-	values = ft_split(line, ' ');
-	while (i < width)
+	j = 0;
+	while (j < i)
 	{
-		row[i][0] = ft_atoi(values[i]);
-		// Shouldn't there be a safeguard here in case
-		// ft_atoi(values[i]) returns the default 0?
-		if (ft_strchr(line, ','))
-			row[i][1] = ft_atoi(ft_strchr(line, ',') + 1);
-			// Safeguard for possibility of 
-			// ft_atoi(ft_strchr(line, ',') + 1) == 0
-		// else
-			// Set default colour?
-		free(values[i]);
-		i++;
+		k = 0;
+		while (k < width)
+		{
+			free(env->map->array[j][k]);
+			k++;
+		}
+		free(env->map->array[j]);
+		j++;
 	}
-	free(values);
+	free(env->map->array);
 }
 
-void	free_map_array(t_fdf *env, int i)
+void	free_map_array_row(int **row, int i)
 {
 	int	j;
 
 	j = 0;
 	while (j < i)
 	{
-		free(env->map->array[j]);
+		free(row[j]);
 		j++;
 	}
-	free(env->map->array);
 }
 
 // free_map_array() is assuming that there's only a need
@@ -175,45 +172,115 @@ void	free_gnl_static(char *line, int file_fd)
 	line = NULL;
 }
 
+void	print_array(t_fdf *env)
+{
+	int i;
+	int	j;
+	
+	i = 0;
+	while(i < env->map->height)
+	{
+		j = 0;
+		while (j < env->map->width)
+		{
+			ft_printf("%d ", env->map->array[i][j][0]);
+			j++;
+		}
+		i++;
+		ft_printf("\n'");
+	}
+}
+
+void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
+{
+	char	**values;
+	int		k;
+	int		**row;
+
+	k = 0;
+	row = env->map->array[row_nbr];
+	values = ft_split(line, ' ');
+	if (!values)
+	{
+		// while(k <= width + 1)	// Three lines for testing purposes.
+		// 	free(values[k++]);
+		// free(values);
+		free_gnl_static(line, env->file_fd);
+		free_map_array_width(env, ++row_nbr, env->map->width);
+		if (close(env->file_fd) < 0)
+				error_close_window(env, "Error on initializing map array row - unable to allocate memory to split() - and on closing file.", 1);
+		error_close_window(env, "Error on initializing map array row: unable to allocate memory to split().", 1);
+	}
+	while (k < width)
+	{
+		row[k] = (int *)malloc(sizeof(int) * 2);
+		if (!row[k])
+		{
+			free_map_array_row(row, k);
+			free(row);
+			free_map_array_width(env, row_nbr, env->map->width);
+			while(k <= width)
+				free(values[k++]);
+			free(values);
+			if (close(env->file_fd) < 0)
+				error_close_window(env, "Error on initializing map array cell - unable to allocate memory - and on closing file.", 1);
+			error_close_window(env, "Error on initializing map array cell: unable to allocate memory .", 1);
+		}
+		row[k][0] = ft_atoi(values[k]);
+		// Shouldn't there be a safeguard here in case
+		// ft_atoi(values[i]) returns the default 0?
+		if (ft_strchr(line, ','))
+			row[k][1] = ft_atoi(ft_strchr(line, ',') + 1);
+			// Safeguard for possibility of 
+			// ft_atoi(ft_strchr(line, ',') + 1) == 0
+		// else
+			// Set default colour?
+		free(values[k]);
+		k++;
+	}
+	free(values[k]);
+	free(values);
+}
+
 void	initialize_map_array(t_fdf *env, char *file_path)
 {
-	int		file_fd;
 	char 	*line;
 	int		height;
 	int		i;
 
 	i = 0;
 	height = env->map->height;
-	file_fd = open(file_path, O_RDONLY);
-	if (!file_fd)
+	env->file_fd = open(file_path, O_RDONLY);
+	if (!env->file_fd)
 		error_close_window(env, "Unable to open file.", 1);
 
-	env->map->array = (int ***)malloc(sizeof(int **) * env->map->height);
+	env->map->array = (int ***)ft_calloc(1, sizeof(int **) * env->map->height);
 	if (!env->map->array)
 		error_close_window(env, "Unable to allocate memory for map array.", 1);
 
-	line = get_next_line(file_fd);
+	line = get_next_line(env->file_fd);
 	i = 0;
-	while (i <= height)
+	while (i < height)
 	{
-		env->map->array[i] = (int **)malloc(sizeof(int *) * env->map->width);
-		if (env->map->array[i])
+		env->map->array[i] = (int **)ft_calloc(1, sizeof(int *) * env->map->width);
+		if (!env->map->array[i])
 		{
-			free_map_array(env, i);			
-			free_gnl_static(line, file_fd);
-			if (close(file_fd) < 0)
+			free_gnl_static(line, env->file_fd);
+			if (close(env->file_fd) < 0)
 				error_close_window(env, "Unable to allocate memory for map array row and close file.", 1);
 			error_close_window(env, "Unable to allocate memory for map array row", 1);
 		}
-		initialize_map_array_cell(env->map->array[i], line, env->map->width);
+		ft_printf("Row %d\n", i);
+		initialize_map_array_cell(env, i, line, env->map->width);
 		free(line);
 		line = NULL;
-		line = get_next_line(file_fd);
+		line = get_next_line(env->file_fd);
 		i++;
 	}
 	free(line);
 	line = NULL;
-	if (close(file_fd) < 0) //
+
+	if (close(env->file_fd) < 0) //
 		error_close_window(env, "Unable to close file.", 1);
 }
 
@@ -226,6 +293,8 @@ void	initialize_map(t_fdf *env, char *file_path)
 	set_map_width(env, file_path);
 	initialize_map_array(env, file_path);
 
+	print_array(env); /////////
+	free_map_array_width(env, env->map->height, env->map->width); /////////
 	error_close_window(env, "Mem leak check", 1);
 		
 }
