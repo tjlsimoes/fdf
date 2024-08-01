@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/29 13:03:13 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:00:48 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	free_map_array_row(int **row, int i)
 		free(row[j]);
 		j++;
 	}
+	free(row);
 }
 
 // free_map_array() is assuming that there's only a need
@@ -216,8 +217,8 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
 		row[k] = (int *)malloc(sizeof(int) * 2);
 		if (!row[k])
 		{
+			free_gnl_static(line, env->file_fd);
 			free_map_array_row(row, k);
-			free(row);
 			free_map_array_width(env, row_nbr, env->map->width);
 			while(k <= width)
 				free(values[k++]);
@@ -265,6 +266,7 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 		env->map->array[i] = (int **)ft_calloc(1, sizeof(int *) * env->map->width);
 		if (!env->map->array[i])
 		{
+			free_map_array_width(env, i, env->map->width);
 			free_gnl_static(line, env->file_fd);
 			if (close(env->file_fd) < 0)
 				error_close_window(env, "Unable to allocate memory for map array row and close file.", 1);
