@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/29 12:51:43 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:34:48 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,17 @@ void	initialize_map(t_fdf *env, char *file_path);
 void	initialize_map_array(t_fdf *env, char *file_path);
 void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width);
 
+void	free_split_result(char **values, int width);
+void	cell_error_array_free(t_fdf *env, int **row, int row_nbr, int k);
+void	cell_error_split_res_free(char	**values, int k, int width);
+void	close_call_error(t_fdf *env, char *close_error_msg, char *error_msg, int sys_error);
+void	split_error(t_fdf *env, int row_nbr, char *line);
+
 void	set_map_height(t_fdf *env, char *file_path);
 int		get_nbr_substrings(char const *s, char c);
 void	check_const_width(t_fdf *env, char *line, int width);
 void	set_map_width(t_fdf *env, char *file_path);
-
+void	array_cell_colour_init(char *line, int **row, int k);
 
 void	set_hooks(t_fdf *env);
 int		handle_no_event();
