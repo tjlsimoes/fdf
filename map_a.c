@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:50:35 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:18:49 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_map_height(t_fdf *env, char *file_path)
 	char	*line;
 
 	env->file_fd = open(file_path, O_RDONLY);
-	if (!env->file_fd)
+	if (env->file_fd == -1)
 		error_close_window(env, "Unable to open file.", 1);
 	height = 0;
 	line = get_next_line(env->file_fd);
@@ -46,7 +46,7 @@ void	set_map_width(t_fdf *env, char *file_path)
 	char	*line;
 
 	env->file_fd = open(file_path, O_RDONLY);
-	if (!env->file_fd)
+	if (env->file_fd == -1)
 		error_close_window(env, "Unable to open file.", 1);
 	width = 0;
 	line = get_next_line(env->file_fd);

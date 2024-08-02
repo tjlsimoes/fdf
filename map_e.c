@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:57:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:19:06 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	map_fd_open_array_init(t_fdf *env, char *file_path)
 {
 	env->file_fd = open(file_path, O_RDONLY);
-	if (!env->file_fd)
+	if (env->file_fd == -1)
 		error_close_window(env, "Unable to open file.", 1);
 	env->map->array = (int ***)ft_calloc(1, sizeof(int **) * env->map->height);
 	if (!env->map->array)
