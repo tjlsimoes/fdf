@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:07:24 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:27:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:51:54 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	free_split_result(char **values, int width)
 
 void	print_array(t_fdf *env)
 {
-	int i;
+	int	i;
 	int	j;
-	
+
 	i = 0;
-	while(i < env->map->height)
+	while (i < env->map->height)
 	{
 		j = 0;
 		while (j < env->map->width)

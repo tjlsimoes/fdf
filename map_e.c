@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:43:20 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:57:56 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	row_error_array_free(t_fdf *env, int i, char *line)
 {
 	free_gnl_static(line, env->file_fd);
 	free_map_array_width(env, i, env->map->width);
-	close_call_error(env,"Unable to allocate memory for map array row and close file.", "Unable to allocate memory for map array row,", 1);
+	close_call_error(env,
+		"Error map array row (mrm alloc) and close file.",
+		"Unable to allocate memory for map array row,", 1);
 }

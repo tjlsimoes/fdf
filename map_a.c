@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:41:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:50:35 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	set_map_height(t_fdf *env, char *file_path)
 {
 	int		height;
-	char 	*line;
+	char	*line;
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (!env->file_fd)
@@ -40,11 +40,10 @@ void	set_map_height(t_fdf *env, char *file_path)
 
 // Possible combination of both errors on set_map_height?
 
-
 void	set_map_width(t_fdf *env, char *file_path)
 {
 	int		width;
-	char 	*line;
+	char	*line;
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (!env->file_fd)
@@ -72,7 +71,8 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
-void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
+void	initialize_map_array_cell(t_fdf *env, int row_nbr,
+									char *line, int width)
 {
 	char	**values;
 	int		k;
@@ -91,11 +91,12 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
 			free_gnl_static(line, env->file_fd);
 			cell_error_array_free(env, row, row_nbr, k);
 			cell_error_split_res_free(values, k, width);
-			close_call_error(env,"Error on initializing map array cell - unable to allocate memory - and on closing file.", "Error on initializing map array cell: unable to allocate memory .", 1);
+			close_call_error(env,
+				"Error array cell init (mem alloc) and file close.",
+				"Error array cell init: memory allocation.", 1);
 		}
 		row[k][0] = ft_atoi(values[k]);
-		array_cell_colour_init(line, row, k);
-		k++;
+		array_cell_colour_init(line, row, k++); // Check
 	}
 	free_split_result(values, width);
 }
@@ -104,7 +105,7 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
 
 void	initialize_map_array(t_fdf *env, char *file_path)
 {
-	char 	*line;
+	char	*line;
 	int		i;
 
 	i = 0;
@@ -113,7 +114,8 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 	i = 0;
 	while (i < env->map->height)
 	{
-		env->map->array[i] = (int **)ft_calloc(1, sizeof(int *) * env->map->width);
+		env->map->array[i] = (int **)ft_calloc(1,
+				sizeof(int *) * env->map->width);
 		if (!env->map->array[i])
 			row_error_array_free(env, i, line);
 		initialize_map_array_cell(env, i, line, env->map->width);
@@ -131,7 +133,8 @@ void	initialize_map(t_fdf *env, char *file_path)
 {
 	env->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!env->map)
-		error_close_window(env, "Unable to allocate memory for map variable.", 1);
+		error_close_window(env,
+			"Unable to allocate memory for map variable.", 1);
 	set_map_height(env, file_path);
 	set_map_width(env, file_path);
 	initialize_map_array(env, file_path);
@@ -139,5 +142,4 @@ void	initialize_map(t_fdf *env, char *file_path)
 	print_array(env); /////////
 	free_map_array_width(env, env->map->height, env->map->width); /////////
 	error_close_window(env, "Mem leak check", 1);
-		
 }

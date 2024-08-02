@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:27:24 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:52:52 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_nbr_substrings(char const *s, char c)
 void	check_const_width(t_fdf *env, char *line, int width)
 {
 	int	difference_q;
-	int nbr_columns;
+	int	nbr_columns;
 
 	difference_q = 0;
 	while (line)
@@ -51,7 +51,7 @@ void	check_const_width(t_fdf *env, char *line, int width)
 		line = NULL;
 		line = get_next_line(env->file_fd);
 		nbr_columns = get_nbr_substrings(line, ' ') - 1;
-		if (width != nbr_columns && nbr_columns != - 1)
+		if (width != nbr_columns && nbr_columns != -1)
 			difference_q = 1;
 	}
 	free(line);
