@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:07:24 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/01 13:40:02 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:27:52 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ void	free_map_array_row(int **row, int i)
 	}
 	free(row);
 }
-
-// free_map_array() is assuming that there's only a need
-// to free array rows up to i and not including i. As from
-// it is being called precisely when row i mem alloc fails.
 
 void	free_gnl_static(char *line, int file_fd)
 {

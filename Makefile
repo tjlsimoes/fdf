@@ -6,7 +6,7 @@
 #    By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/26 18:01:17 by tjorge-l          #+#    #+#              #
-#    Updated: 2024/08/01 13:35:28 by tjorge-l         ###   ########.fr        #
+#    Updated: 2024/08/02 12:42:56 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 DEBUG_FLAGS = -g
 
-SRC := main.c hooks.c map_a.c map_b.c map_c.c
+SRC := main.c hooks.c map_a.c map_b.c map_c.c map_d.c \
+map_e.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)

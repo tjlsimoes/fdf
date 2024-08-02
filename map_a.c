@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/01 13:35:02 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:41:52 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,58 +40,6 @@ void	set_map_height(t_fdf *env, char *file_path)
 
 // Possible combination of both errors on set_map_height?
 
-int	get_nbr_substrings(char const *s, char c)
-{
-	int		i;
-	int		k;
-	int		count;
-
-	i = 0;
-	k = -1;
-	count = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		if (s[i] == c && k > 0)
-		{
-			k = -1;
-		}
-		else if (s[i] != c && k < 0)
-		{
-			k = 1;
-			count++;
-		}
-		i++;
-	}
-	return (count);
-}
-
-void	check_const_width(t_fdf *env, char *line, int width)
-{
-	int	difference_q;
-	int nbr_columns;
-
-	difference_q = 0;
-	while (line)
-	{
-		free(line);
-		line = NULL;
-		line = get_next_line(env->file_fd);
-		nbr_columns = get_nbr_substrings(line, ' ') - 1;
-		if (width != nbr_columns && nbr_columns != - 1)
-			difference_q = 1;
-	}
-	free(line);
-	line = NULL;
-	if (difference_q)
-		error_close_window(env, "Invalid map: lines with unequal width.", 1);
-}
-
-// What would happen if:
-//	a) map with nothing is passed.
-//	b) map with new line is passed.
-//	c) map with regular lines with one in the middle with just a new line.
 
 void	set_map_width(t_fdf *env, char *file_path)
 {
@@ -124,6 +72,60 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
+void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width)
+{
+	char	**values;
+	int		k;
+	int		**row;
+
+	k = 0;
+	row = env->map->array[row_nbr];
+	values = ft_split(line, ' ');
+	if (!values)
+		split_error(env, row_nbr, line);
+	while (k < width)
+	{
+		row[k] = (int *)malloc(sizeof(int) * 2);
+		if (!row[k])
+		{
+			free_gnl_static(line, env->file_fd);
+			cell_error_array_free(env, row, row_nbr, k);
+			cell_error_split_res_free(values, k, width);
+			close_call_error(env,"Error on initializing map array cell - unable to allocate memory - and on closing file.", "Error on initializing map array cell: unable to allocate memory .", 1);
+		}
+		row[k][0] = ft_atoi(values[k]);
+		array_cell_colour_init(line, row, k);
+		k++;
+	}
+	free_split_result(values, width);
+}
+
+// Possible need to safeguard for ft_atoi(values[]) == 0?
+
+void	initialize_map_array(t_fdf *env, char *file_path)
+{
+	char 	*line;
+	int		i;
+
+	i = 0;
+	map_fd_open_array_init(env, file_path);
+	line = get_next_line(env->file_fd);
+	i = 0;
+	while (i < env->map->height)
+	{
+		env->map->array[i] = (int **)ft_calloc(1, sizeof(int *) * env->map->width);
+		if (!env->map->array[i])
+			row_error_array_free(env, i, line);
+		initialize_map_array_cell(env, i, line, env->map->width);
+		free(line);
+		line = NULL;
+		line = get_next_line(env->file_fd);
+		i++;
+	}
+	free_gnl_static(line, env->file_fd);
+	if (close(env->file_fd) < 0)
+		error_close_window(env, "Unable to close file.", 1);
+}
 
 void	initialize_map(t_fdf *env, char *file_path)
 {
