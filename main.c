@@ -6,62 +6,11 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/07/29 12:48:39 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:23:01 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	close_window(t_fdf *env)
-{
-	mlx_destroy_window(env->mlx, env->win);
-	mlx_destroy_display(env->mlx);
-	free(env->mlx);
-	free(env->map);
-	free(env);
-	exit(0);
-}
-
-void	error_close_window(t_fdf *env, char *error_msg, int sys_error)
-{
-	mlx_destroy_window(env->mlx, env->win);
-	mlx_destroy_display(env->mlx);
-	free(env->mlx);
-	free(env->map);
-	free(env);
-	ft_error(error_msg, sys_error);
-}
-
-void	free_display_env(t_fdf *env)
-{
-	mlx_destroy_display(env->mlx);
-	free(env->mlx);
-	free(env);
-}
-
-void	ft_error(char *error_msg, int sys_error)
-{
-	if (!sys_error)
-	{
-		ft_printf(error_msg); // Possible need to send this to error fd.
-	}
-	else
-		perror(error_msg);
-	exit(1);
-}
-
-char	*set_title(t_fdf *env, char *str)
-{
-	char	*title;
-
-	title = ft_strjoin(ft_strdup("FDF - "), str);
-	if (!title)
-	{
-		free_display_env(env);
-		ft_error("Unable to allocate memory for title.", 1);
-	}
-	return (title);
-}
 
 t_fdf	*initialize_env(char *str)
 {
@@ -86,6 +35,9 @@ t_fdf	*initialize_env(char *str)
 		ft_error("Unable to create window.", 1);
 	}
 	env->map = NULL;
+	env->img = mlx_new_image(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!env->img)
+		error_img_close_window(env, "Unable to create image.", 1);
 	return (env);
 }
 

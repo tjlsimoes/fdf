@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:42:30 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:30:40 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,34 @@ typedef struct s_map
 	//
 }	t_map;
 
+typedef struct s_alt_img
+{
+	char	*data_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_alt_img;
+
 typedef struct s_fdf
 {
-	int		file_fd;
-	void	*mlx;
-	void	*win;
-	t_map	*map;
+	int			file_fd;
+	void		*mlx;
+	void		*win;
+	t_map		*map;
+	t_alt_img	*img;
 }	t_fdf;
 
-
+// Error handling
 void	ft_error(char *error_msg, int sys_error);
 void	error_close_window(t_fdf *env, char *error_msg, int sys_error);
-void	free_display_env(t_fdf *env);
+
+// Environment initialization
+t_fdf	*initialize_env(char *str);
 
 int		close_window(t_fdf *env);
-
-t_fdf	*initialize_env(char *str);
+void	free_display_env(t_fdf *env);
+void	img_free(t_alt_img *img);
+void	error_img_close_window(t_fdf *env, char *error_msg, int sys_error);
 char	*set_title(t_fdf *env, char *str);
 
 // Map initialization
@@ -75,8 +87,7 @@ void	array_cell_colour_init(char *line, int **row, int k);
 void	map_fd_open_array_init(t_fdf *env, char *file_path);
 void	row_error_array_free(t_fdf *env, int i, char *line);
 
-//
-
+// Hook handling
 void	set_hooks(t_fdf *env);
 int		handle_no_event();
 int		handle_mouse_click(int button, int x, int y);
