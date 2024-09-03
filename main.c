@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:02:08 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:20:22 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 		initialize_map(env, argv[1]);
 
 		set_hooks(env);
-		draw(env);
+		// draw(env);
 
 		print_array(env); /////////
 		// free_map_array_width(env, env->map->height, env->map->width); /////////
