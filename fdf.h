@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:35:20 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:43:04 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	draw_points(t_fdf *env);
 	//Temporary
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
 
 typedef struct s_rect
 {
@@ -107,8 +108,9 @@ typedef struct s_rect
 	int colour;
 }	t_rect;
 
-int	render(t_fdf *env);
-int	render_rect(t_fdf *env, t_rect rect);
+int		render(t_fdf *env);
+void	render_background(t_fdf *env, int colour);
+int		render_rect(t_fdf *env, t_rect rect);
 
 // Hook handling
 void	set_hooks(t_fdf *env);
