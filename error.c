@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_b.c                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 13:06:31 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/05 13:27:09 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:00:58 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	error_close_window(t_fdf *env, char *error_msg, int sys_error)
 {
 	mlx_destroy_window(env->mlx, env->win);
 	mlx_destroy_display(env->mlx);
-	img_free(env->img);
+	mlx_destroy_image(env->mlx, env->img);
+	// img_free(env->img);
 	free(env->mlx);
 	free(env->map);
 	free(env);

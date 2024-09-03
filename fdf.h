@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/05 13:30:40 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:02:48 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
 
+// Temporary!
+# define RED_PIXEL 0xFF0000
+
 typedef struct s_map
 {
 	int	height;
@@ -33,6 +36,7 @@ typedef struct s_map
 
 typedef struct s_alt_img
 {
+	t_img	*img_ptr;
 	char	*data_addr;
 	int		bpp;
 	int		size_line;
@@ -45,7 +49,7 @@ typedef struct s_fdf
 	void		*mlx;
 	void		*win;
 	t_map		*map;
-	t_alt_img	*img;
+	t_img		*img;
 }	t_fdf;
 
 // Error handling
@@ -86,6 +90,14 @@ void	array_cell_colour_init(char *line, int **row, int k);
 
 void	map_fd_open_array_init(t_fdf *env, char *file_path);
 void	row_error_array_free(t_fdf *env, int i, char *line);
+
+// Drawing
+void	draw(t_fdf *env);
+
+void	img_pix_put(t_img *img, int x, int y, int colour);
+void	draw_points(t_fdf *env);
+	//Temporary
+int	render(t_fdf *env);
 
 // Hook handling
 void	set_hooks(t_fdf *env);

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/05 13:23:01 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:08:43 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,16 @@ int	main(int argc, char **argv)
 		initialize_map(env, argv[1]);
 
 		set_hooks(env);
+		draw(env);
+	
 		mlx_loop(env->mlx);
+		
+		print_array(env); /////////
+		free_map_array_width(env, env->map->height, env->map->width); /////////
+		mlx_destroy_image(env->mlx, env->img);
+		error_close_window(env, "Mem leak check", 1); /////
+
+
 	}
 	else
 		ft_printf("Correct Usage: ./fdf <file_name>");
