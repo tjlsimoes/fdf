@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:21:37 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:37:46 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,27 @@ void	draw(t_fdf *env)
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 }
 
+int	render_rect(t_fdf *env, t_rect rect)
+{
+	int	i;
+	int	j;
+
+	if (env->win == NULL)
+		return (1);
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			mlx_pixel_put(env->mlx, env->win, j++, i, rect.colour);
+		++i;
+	}
+	return (0);
+}
+
 int	render(t_fdf *env)
 {
-	if (env->win)
-		mlx_pixel_put(env->mlx, env->win, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, RED_PIXEL);
+	render_rect(env, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
+	render_rect(env, (t_rect){0, 0, 100, 100, RED_PIXEL});
 	return (0);
 }

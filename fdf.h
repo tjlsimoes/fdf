@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:14:19 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:35:20 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 # include <stdio.h>
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
-
-// Temporary!
-# define RED_PIXEL 0xFF0000
 
 typedef struct s_map
 {
@@ -96,8 +93,22 @@ void	draw(t_fdf *env);
 
 void	img_pix_put(t_img *img, int x, int y, int colour);
 void	draw_points(t_fdf *env);
+
 	//Temporary
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int	height;
+	int colour;
+}	t_rect;
+
 int	render(t_fdf *env);
+int	render_rect(t_fdf *env, t_rect rect);
 
 // Hook handling
 void	set_hooks(t_fdf *env);
