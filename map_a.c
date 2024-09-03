@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 13:07:21 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:21:37 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	initialize_map(t_fdf *env, char *file_path)
 	set_map_width(env, file_path);
 	initialize_map_array(env, file_path);
 
-	print_array(env); /////////
-	free_map_array_width(env, env->map->height, env->map->width); /////////
-	error_close_window(env, "Mem leak check", 1);
+	// print_array(env); /////////
+	// free_map_array_width(env, env->map->height, env->map->width); /////////
+	// error_close_window(env, "Mem leak check", 1);
 }
