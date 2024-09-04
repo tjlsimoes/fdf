@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/04 10:46:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:58:14 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@
 // 	}
 // }
 
-// void	draw_points(t_fdf *env)
-// {
-// 	img_pix_put(env->img, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0xFF0000);
-// }
+void	draw_points(t_fdf *env)
+{
+	img_pix_put(env, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0xFF0000);
+}
 
 // void	img_pix_put(t_fdf *env, int x, int y, int colour)
 // {
@@ -91,8 +91,8 @@ int	draw(t_fdf *env)
 	env->data_addr = NULL;
 	env->data_addr = mlx_get_data_addr(env->img, &env->bpp, &env->size_line, 
 					&env->type);
-	// draw_points(env);
-	render(env);
+	draw_points(env);
+	// render(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
 }
