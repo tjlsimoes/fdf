@@ -6,67 +6,13 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/04 10:58:14 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:20:56 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /// NEED TO UNDERSTAND THIS FUNCTION!
-// void	img_pix_put(t_img *img, int x, int y, int colour)
-// {
-// 	char	*pixel;
-// 	int		i;
-
-// 	i = img->bpp - 8;
-// 	pixel = img->data + (y * img->size_line + x * (img->bpp / 8));
-// 	while (i >= 0)
-// 	{
-// 		// big endian: most significant bit is the leftmost bit
-// 		if (img->type != 0)
-// 			*pixel++ = (colour >> i ) & 0xFF;
-// 		// little endian> least significant bit is the lefmost bit
-// 		else
-// 			*pixel++ = (colour >> (img->bpp - 8 - i)) & 0xFF;
-// 		i -= 8;
-// 	}
-// }
-
-
-
-
-// void	draw_points(t_fdf *env)
-// {
-// 	int	i;
-// 	int j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (i < env->map->width)
-// 	{
-// 		j = 0;
-// 		while (j < env->map->width)
-// 		{
-// 			img_pix_put(env->img, i, j, 0);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-void	draw_points(t_fdf *env)
-{
-	img_pix_put(env, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0xFF0000);
-}
-
-// void	img_pix_put(t_fdf *env, int x, int y, int colour)
-// {
-// 	char	*pixel;
-
-// 	pixel = env->data_addr + (y * env->img->size_line + x * (env->img->bpp / 8));
-// 	*(int *)pixel = colour;
-// }
-
 void	img_pix_put(t_fdf *env, int x, int y, int colour)
 {
 	char	*pixel;
@@ -85,6 +31,30 @@ void	img_pix_put(t_fdf *env, int x, int y, int colour)
 		i -= 8;
 	}
 }
+
+void	draw_points(t_fdf *env)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			img_pix_put(env, j, i, RED_PIXEL);
+			j += 60;
+		}
+		i += 30;
+	}
+}
+
+// void	draw_points(t_fdf *env)
+// {
+// 	img_pix_put(env, WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0xFF0000);
+// }
 
 int	draw(t_fdf *env)
 {
