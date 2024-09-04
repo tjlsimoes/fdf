@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:43:04 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:45:02 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ typedef struct s_fdf
 	void		*mlx;
 	void		*win;
 	t_map		*map;
-	t_img		*img;
+	void		*img;
+	char		*data_addr;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			type;
 }	t_fdf;
 
 // Error handling
@@ -89,9 +94,9 @@ void	map_fd_open_array_init(t_fdf *env, char *file_path);
 void	row_error_array_free(t_fdf *env, int i, char *line);
 
 // Drawing
-void	draw(t_fdf *env);
+int	draw(t_fdf *env);
 
-void	img_pix_put(t_img *img, int x, int y, int colour);
+void	img_pix_put(t_fdf *env, int x, int y, int colour);
 void	draw_points(t_fdf *env);
 
 	//Temporary

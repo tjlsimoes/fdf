@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:20:22 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:45:45 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_fdf	*initialize_env(char *str)
 	env->img = mlx_new_image(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!env->img)
 		error_img_close_window(env, "Unable to create image.", 1);
+	// env->data_addr = NULL;
 	return (env);
 }
 
