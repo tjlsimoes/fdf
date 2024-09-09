@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/04 11:20:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:27:02 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,44 @@ void	img_pix_put(t_fdf *env, int x, int y, int colour)
 	}
 }
 
+
 void	draw_points(t_fdf *env)
 {
 	int	i;
 	int j;
 
-	i = 0;
-	j = 0;
-	while (i < WINDOW_HEIGHT)
+	i = WINDOW_HEIGHT / env->map->height;
+	j = WINDOW_WIDTH / env->map->width;
+	while (i < WINDOW_HEIGHT - WINDOW_HEIGHT / env->map->height)
 	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
+		j = WINDOW_WIDTH / env->map->width;
+		while (j < WINDOW_WIDTH - WINDOW_WIDTH / env->map->width)
 		{
 			img_pix_put(env, j, i, RED_PIXEL);
-			j += 60;
+			j += (WINDOW_WIDTH - (WINDOW_WIDTH / env->map->width) * 2) / env->map->width;
 		}
-		i += 30;
+		i += (WINDOW_HEIGHT - (WINDOW_HEIGHT / env->map->height) * 2) / env->map->height;
 	}
 }
+
+// void	draw_points(t_fdf *env)
+// {
+// 	int	i;
+// 	int j;
+
+// 	i = 0;
+// 	j = 0;
+// 	while (i < WINDOW_HEIGHT)
+// 	{
+// 		j = 0;
+// 		while (j < WINDOW_WIDTH)
+// 		{
+// 			img_pix_put(env, j, i, RED_PIXEL);
+// 			j += 60;
+// 		}
+// 		i += 30;
+// 	}
+// }
 
 // void	draw_points(t_fdf *env)
 // {
