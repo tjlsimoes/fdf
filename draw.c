@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/09 12:27:02 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:10:14 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	draw_points(t_fdf *env)
 	int	i;
 	int j;
 
-	i = WINDOW_HEIGHT / env->map->height;
-	j = WINDOW_WIDTH / env->map->width;
-	while (i < WINDOW_HEIGHT - WINDOW_HEIGHT / env->map->height)
+	i = 0;
+	j = 0;
+	while (i <= WINDOW_HEIGHT)
 	{
-		j = WINDOW_WIDTH / env->map->width;
-		while (j < WINDOW_WIDTH - WINDOW_WIDTH / env->map->width)
+		j = 0;
+		while (j <= WINDOW_WIDTH)
 		{
 			img_pix_put(env, j, i, RED_PIXEL);
-			j += (WINDOW_WIDTH - (WINDOW_WIDTH / env->map->width) * 2) / env->map->width;
+			j += (WINDOW_WIDTH / env->map->width);
 		}
-		i += (WINDOW_HEIGHT - (WINDOW_HEIGHT / env->map->height) * 2) / env->map->height;
+		i += (WINDOW_HEIGHT / env->map->height);
 	}
 }
 
