@@ -6,13 +6,14 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/04 10:45:02 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:54:03 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "math.h"
 # include "libft/libft.h"
 # include "printf/ft_printf.h"
 # include "./mlx.h"
@@ -53,6 +54,14 @@ typedef struct s_fdf
 	int			endian;
 	int			type;
 }	t_fdf;
+
+typedef struct s_point
+{
+	int	x;
+	int y;
+	int z;
+	int colour;
+}	t_point;
 
 // Error handling
 void	ft_error(char *error_msg, int sys_error);
@@ -98,8 +107,15 @@ int	draw(t_fdf *env);
 
 void	img_pix_put(t_fdf *env, int x, int y, int colour);
 void	draw_points(t_fdf *env);
+void	draw_map(t_fdf *env);
+void	draw_line(t_point a, t_point b);
 
-	//Temporary
+
+// Line Algorithm
+void	slope_less_than_one(int dx, int dy, t_point a, t_point b);
+void	slope_bigger_than_one(int dx, int dy, t_point a, t_point b);
+
+	//Temporary Drawing
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
 # define WHITE_PIXEL 0xFFFFFF

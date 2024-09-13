@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/09 13:10:14 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:55:29 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,82 @@ void	img_pix_put(t_fdf *env, int x, int y, int colour)
 	}
 }
 
-
-void	draw_points(t_fdf *env)
+t_point	project(int x, int y, t_fdf *env)
 {
-	int	i;
-	int j;
+	t_point point;
 
-	i = 0;
-	j = 0;
-	while (i <= WINDOW_HEIGHT)
-	{
-		j = 0;
-		while (j <= WINDOW_WIDTH)
-		{
-			img_pix_put(env, j, i, RED_PIXEL);
-			j += (WINDOW_WIDTH / env->map->width);
-		}
-		i += (WINDOW_HEIGHT / env->map->height);
-	}
+	point.z = env->map->array[y][x][0];
+	
+	point.colour = RED_PIXEL;	// Temporary
+
+	// Isometric projection
+	point.x = (x - y) * cos(0.523599);
+	point.y = (x + y) * sin(0.523599) + point.z;
+
+	// Try to center.
+	// Missing zoom factor.
+	point.x += WINDOW_WIDTH / 2;
+	point.y += WINDOW_HEIGHT / 2;
+	return (point);
 }
+
+void	draw_line(t_point a, t_point b)
+{
+	int	dy;
+	int	dx;
+
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	if (abs(dx) > abs(dy))
+		slope_less_than_one(dx, dy, a, b);
+	else
+		slope_bigger_than_one(dx, dy, a, b);
+}
+// Need to understand the reason for use of absolute values.
+
+void	draw_map(t_fdf *env)
+{
+	int y;
+	int x;
+
+	y = 0;
+	while (y < env->map->height)
+	{
+		x = 0;
+		while (x < env->map->width)
+		{
+			if (x != env->map->width - 1)
+				draw_line(project(x, y, env), project(x + 1, y, env));
+			if (y != env->map->height - 1)
+				draw_line(project(x, y, env), project(x, y + 1, env));
+			x++;
+		}
+		y++;
+	}	
+}
+
+// void	draw_points(t_fdf *env)
+// {
+// 	int	i;
+// 	int j;
+// 	int	x_sep;
+// 	int y_sep;
+
+// 	x_sep = WINDOW_WIDTH / (env->map->width + 2);
+// 	y_sep = WINDOW_HEIGHT / (env->map->height + 2);
+// 	i = y_sep;
+// 	j = x_sep;
+// 	while (i < WINDOW_HEIGHT - y_sep)
+// 	{
+// 		j = x_sep;
+// 		while (j < WINDOW_WIDTH - x_sep)
+// 		{
+// 			img_pix_put(env, j, i, RED_PIXEL);
+// 			j += x_sep;
+// 		}
+// 		i += y_sep;
+// 	}
+// }
 
 // void	draw_points(t_fdf *env)
 // {
@@ -81,7 +138,7 @@ int	draw(t_fdf *env)
 	env->data_addr = NULL;
 	env->data_addr = mlx_get_data_addr(env->img, &env->bpp, &env->size_line, 
 					&env->type);
-	draw_points(env);
+	// draw_points(env);
 	// render(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
