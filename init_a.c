@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 13:04:12 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 16:02:01 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:27:01 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	close_window(t_fdf *env)
 	mlx_destroy_display(env->mlx);
 	free(env->mlx);
 	free(env->map);
+	free(env->camera);
 	free(env);
 	exit(0);
 }

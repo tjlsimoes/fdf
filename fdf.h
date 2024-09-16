@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 11:29:27 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:31:00 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,23 @@
 # include "X11/X.h"
 # include <stdlib.h>
 # include <stdio.h>
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+
+// Additions
+
+typedef struct s_camera
+{
+	int		zoom;
+	double	x_angle;
+	double	y_angle;
+	double	z_angle;
+	float	z_height;
+	int		x_offset;
+	int		y_offset;
+	int		iso;
+}				t_camera;
+
 
 typedef struct s_map
 {
@@ -53,6 +68,7 @@ typedef struct s_fdf
 	int			size_line;
 	int			endian;
 	int			type;
+	t_camera	*camera;
 }	t_fdf;
 
 typedef struct s_point

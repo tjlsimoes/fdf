@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:47:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 12:17:31 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:55:24 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b)
 	dx = b.x - a.x;
 	dy = b.y - a.y;
 	i = -1;
-	p = 2 * abs(dy) - abs(dx);
+	p = 2 * abs(dx) - abs(dy);
 	img_pix_put(env, a.x, a.y, a.colour);
 	while (++i < abs(dy))
 	{
@@ -74,5 +74,4 @@ void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b)
 		}
 		img_pix_put(env, a.x, a.y, a.colour);
 	}
-	return ;
 }
