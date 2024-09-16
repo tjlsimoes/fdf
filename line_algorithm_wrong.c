@@ -6,11 +6,104 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:47:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 15:56:22 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:30:48 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	line_low(t_fdf *env, int ax, int ay, int bx, int by)
+{
+	int	dx;
+	int	dy;
+	int	yi;
+	int	d;
+	int	x;
+	int	y;
+
+	dx = bx - ax;
+	dy = by - bx;
+	yi = 1;
+	if (dy < 0)
+	{
+		yi = -1;
+		dy = -dy;
+	}
+
+	d = (2 * dy) - dx;
+	y = ay;
+	x = ax;
+	while (x <= bx)
+	{
+		img_pix_put(env, x, y, RED_PIXEL);
+		if (d > 0)
+		{
+			y = y + yi;
+			d = d + (2 * (dy - dx));
+		}
+		else
+			d = d + 2 * dy;
+	}
+}
+
+static void	line_high(t_fdf *env, int ax, int ay, int bx, int by)
+{
+	int	dx;
+	int	dy;
+	int	xi;
+	int	d;
+	int	x;
+	int	y;
+
+	dx = bx - ax;
+	dy = by - bx;
+	xi = 1;
+	if (dx < 0)
+	{
+		xi = -1;
+		dx = -dx;
+	}
+
+	d = (2 * dx) - dy;
+	x = ax;
+	y = ay;
+
+	while (y <= by)
+	{
+		img_pix_put(env, x, y, RED_PIXEL);
+		if (d > 0)
+		{
+			x = x + xi;
+			d = d + (2 * (dx - dy));
+		}
+		else
+			d = d + 2 * dx;
+	}
+}
+
+
+void	draw_line(t_fdf *env, t_point a, t_point b)
+{
+	int	dy;
+	int	dx;
+
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	if (abs(dx) > abs(dy))
+	{
+		if (a.x > b.x)
+			line_low(env, b.x, b.y, a.x, a.y);
+		else
+			line_low(env, a.x, a.y, b.x, b.y);
+	}
+	else
+	{
+		if (a.y > b.y)
+			line_high(env, b.x, b.y, a.x, a.y);
+		else
+			line_high(env, a.x, a.y, b.x, b.y);
+	}
+}
 
 void	slope_less_than_one(t_fdf *env, t_point a, t_point b)
 {
@@ -23,6 +116,7 @@ void	slope_less_than_one(t_fdf *env, t_point a, t_point b)
 	dy = b.y - a.y;
 	i = -1;
 	p = 2 * abs(dy) - abs(dx);
+	img_pix_put(env, a.x, a.y, a.colour);
 	while (++i < abs(dx))
 	{
 		if (dx > 0)
@@ -54,9 +148,9 @@ void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b)
 	dy = b.y - a.y;
 	i = -1;
 	p = 2 * abs(dx) - abs(dy);
+	img_pix_put(env, a.x, a.y, a.colour);
 	while (++i < abs(dy))
 	{
-		ft_printf("Here! a.x = %d, a.y = %d b.x = %d, %d ", a.x, a.y, b.x, i);
 		if (dy > 0)
 			a.y += 1;
 		else

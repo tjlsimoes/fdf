@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 14:30:47 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:51:01 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	draw_map(t_fdf *env)
 	while (y < env->map->height && y >= 0)
 	{
 		x = 0;
-		while (x < env->map->width)
+		if (env->camera->y_angle > 0)
+			x = env->map->width - 1;
+		while (x < env->map->width && x >= 0)
 		{
-			if (env->camera->y_angle > 0)
-				x = env->map->width - 1;
 			if (x != env->map->width - 1)
 				draw_line(env, project(x, y, env), project(x + 1, y, env));
 			if (y != env->map->height - 1)
