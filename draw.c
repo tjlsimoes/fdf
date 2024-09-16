@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/13 15:55:29 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:39:26 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_point	project(int x, int y, t_fdf *env)
 	return (point);
 }
 
-void	draw_line(t_point a, t_point b)
+void	draw_line(t_fdf *env, t_point a, t_point b)
 {
 	int	dy;
 	int	dx;
@@ -59,9 +59,9 @@ void	draw_line(t_point a, t_point b)
 	dx = b.x - a.x;
 	dy = b.y - a.y;
 	if (abs(dx) > abs(dy))
-		slope_less_than_one(dx, dy, a, b);
+		slope_less_than_one(env, a, b);
 	else
-		slope_bigger_than_one(dx, dy, a, b);
+		slope_bigger_than_one(env, a, b);
 }
 // Need to understand the reason for use of absolute values.
 
@@ -77,9 +77,9 @@ void	draw_map(t_fdf *env)
 		while (x < env->map->width)
 		{
 			if (x != env->map->width - 1)
-				draw_line(project(x, y, env), project(x + 1, y, env));
+				draw_line(env, project(x, y, env), project(x + 1, y, env));
 			if (y != env->map->height - 1)
-				draw_line(project(x, y, env), project(x, y + 1, env));
+				draw_line(env, project(x, y, env), project(x, y + 1, env));
 			x++;
 		}
 		y++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/13 15:54:03 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:40:36 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ int	draw(t_fdf *env);
 void	img_pix_put(t_fdf *env, int x, int y, int colour);
 void	draw_points(t_fdf *env);
 void	draw_map(t_fdf *env);
-void	draw_line(t_point a, t_point b);
+void	draw_line(t_fdf *env, t_point a, t_point b);
 
 
 // Line Algorithm
-void	slope_less_than_one(int dx, int dy, t_point a, t_point b);
-void	slope_bigger_than_one(int dx, int dy, t_point a, t_point b);
+void	slope_less_than_one(t_fdf *env, t_point a, t_point b);
+void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b);
 
 	//Temporary Drawing
 # define RED_PIXEL 0xFF0000
