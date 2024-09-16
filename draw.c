@@ -6,11 +6,18 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 10:39:26 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:08:25 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
 
 /// NEED TO UNDERSTAND THIS FUNCTION!
 void	img_pix_put(t_fdf *env, int x, int y, int colour)
@@ -35,19 +42,36 @@ void	img_pix_put(t_fdf *env, int x, int y, int colour)
 t_point	project(int x, int y, t_fdf *env)
 {
 	t_point point;
+	int	zoom;
 
+	zoom = ft_min(WINDOW_WIDTH / env->map->width / 2,
+			WINDOW_HEIGHT / env->map->height / 2);
 	point.z = env->map->array[y][x][0];
 	
 	point.colour = RED_PIXEL;	// Temporary
 
+	point.x = x * zoom;
+	point.y = y * zoom;
+	point.z *= zoom;
+	point.x -= (env->map->width * zoom) / 2;
+	point.y -= (env->map->height * zoom) / 2;
+
+	// point.x = x;
+	// point.y = y;
 	// Isometric projection
 	point.x = (x - y) * cos(0.523599);
-	point.y = (x + y) * sin(0.523599) + point.z;
+	point.y = (x + y) * sin(0.523599) - point.z;
+
+	// point.x = (x - y) * 1/ sqrt(2);
+	// point.y = (x + y - 2 * point.z) *1/ sqrt(6);
+
+	point.x += WINDOW_WIDTH / 2;
+	point.y += (WINDOW_HEIGHT + env->map->height / 2 * zoom) / 2;
 
 	// Try to center.
 	// Missing zoom factor.
-	point.x += WINDOW_WIDTH / 2;
-	point.y += WINDOW_HEIGHT / 2;
+	// point.x += WINDOW_WIDTH / 2;
+	// point.y += WINDOW_HEIGHT / 2;
 	return (point);
 }
 
@@ -140,6 +164,7 @@ int	draw(t_fdf *env)
 					&env->type);
 	// draw_points(env);
 	// render(env);
+	draw_map(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
 }

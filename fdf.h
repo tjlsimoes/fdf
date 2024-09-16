@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 10:40:36 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:29:27 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	map_fd_open_array_init(t_fdf *env, char *file_path);
 void	row_error_array_free(t_fdf *env, int i, char *line);
 
 // Drawing
-int	draw(t_fdf *env);
+int		draw(t_fdf *env);
 
 void	img_pix_put(t_fdf *env, int x, int y, int colour);
 void	draw_points(t_fdf *env);
