@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 11:12:51 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:46:03 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_point	project(int x, int y, t_fdf *env)
 
 	point.z = env->map->array[y][x][0];
 	point.colour = RED_PIXEL;
+	// ft_printf("Camera zoom: %d ", env->camera->zoom);
+	// env->camera->zoom = 8;
 	point.x = x * env->camera->zoom;
 	point.y = y * env->camera->zoom;
 	point.z *= env->camera->zoom / env->camera->z_height;
@@ -230,6 +232,7 @@ int	draw(t_fdf *env)
 	env->data_addr = NULL;
 	env->data_addr = mlx_get_data_addr(env->img, &env->bpp, &env->size_line, 
 				&env->type);
+	ft_bzero(env->data_addr, WINDOW_WIDTH * WINDOW_HEIGHT * (env->bpp / 8));
 	// draw_points(env);
 	// render(env);
 	draw_map(env);

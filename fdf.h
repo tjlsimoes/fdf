@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 10:50:23 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:47:12 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,8 @@ int		render_rect(t_fdf *env, t_rect rect);
 // Hook handling
 void	set_hooks(t_fdf *env);
 int		handle_no_event();
-int		handle_mouse_click(int button, int x, int y);
+int		handle_mouse_click(int button, int x, int y, void *params);
 int		handle_keypress(int keysym, t_fdf *env);
+void	ft_zoom(int button, t_fdf *env);
 
 #endif
