@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_b.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:07:24 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:51:54 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:57:31 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	print_array(t_fdf *env)
 	int	j;
 
 	i = 0;
+	ft_printf("\n");
 	while (i < env->map->height)
 	{
 		j = 0;
