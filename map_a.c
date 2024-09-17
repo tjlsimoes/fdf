@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/03 13:21:37 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:39:56 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 				"Error array cell init: memory allocation.", 1);
 		}
 		row[k][0] = ft_atoi(values[k]);
-		array_cell_colour_init(line, row, k++); // Check
+		array_cell_colour_init(values[k], row, &k);
 	}
 	free_split_result(values, width);
 }

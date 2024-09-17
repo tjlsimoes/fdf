@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 11:46:03 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:09:50 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	img_pix_put(t_fdf *env, int x, int y, int colour)
 	char	*pixel;
 	int		i;
 
-	i = env->bpp - 8;
-	pixel = env->data_addr + (y * env->size_line + x * (env->bpp / 8));
 	if (!(x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT))
 		return ;
+	i = env->bpp - 8;
+	pixel = env->data_addr + (y * env->size_line + x * (env->bpp / 8));
 	while (i >= 0)
 	{
 		// big endian: most significant bit is the leftmost bit
@@ -67,7 +67,7 @@ t_point	project(int x, int y, t_fdf *env)
 	t_point	point;
 
 	point.z = env->map->array[y][x][0];
-	point.colour = RED_PIXEL;
+	point.colour = env->map->array[y][x][1];
 	// ft_printf("Camera zoom: %d ", env->camera->zoom);
 	// env->camera->zoom = 8;
 	point.x = x * env->camera->zoom;
