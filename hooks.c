@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 10:06:26 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 12:10:42 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:24:51 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_hooks(t_fdf *env)
 {
 	// mlx_loop_hook(env->mlx, handle_no_event, env);
 	// mlx_loop_hook(env->mlx, draw, env);
-	mlx_loop_hook(env->mlx, draw, env);
+	// mlx_loop_hook(env->mlx, draw, env);
 	mlx_hook(env->win, KeyPress, KeyPressMask, handle_keypress, env);
 	mlx_hook(env->win, DestroyNotify, 0, close_window, env);
 	mlx_mouse_hook(env->win, handle_mouse_click, env);

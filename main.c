@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 13:26:38 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:14:55 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 		initialize_camera(env);
 
 		set_hooks(env);
-		// draw(env);
+		draw(env);
 
 		print_array(env); /////////
 	

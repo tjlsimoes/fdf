@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 15:51:01 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:24:38 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	draw(t_fdf *env)
 {
 	env->data_addr = NULL;
 	env->data_addr = mlx_get_data_addr(env->img, &env->bpp, &env->size_line, 
-					&env->type);
+				&env->type);
 	// draw_points(env);
 	// render(env);
 	draw_map(env);
