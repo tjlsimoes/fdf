@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 10:06:26 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 12:06:47 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:16:04 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ void	translate(int keycode, t_fdf *env)
 		env->camera->y_offset -= 10;
 }
 
+void	switch_projection(t_fdf *env)
+{
+	if (env->camera->iso)
+	{
+		env->camera->x_angle = -0.523599;
+		env->camera->y_angle = -0.261799;
+		env->camera->z_angle = 0;
+	}
+	else
+	{
+		env->camera->x_angle = -0.615472907;
+		env->camera->y_angle = -0.523599;
+		env->camera->z_angle = 0.615472907;
+	}
+	env->camera->iso = !env->camera->iso;
+}
+
 int	handle_keypress(int keysym, void *params)
 {
 	t_fdf	*env;
@@ -52,10 +69,15 @@ int	handle_keypress(int keysym, void *params)
 
     if (keysym == XK_Escape)
        close_window(env);
-	if (keysym == XK_Left || keysym == XK_Right || keysym == XK_Down
+	else if (keysym == XK_Left || keysym == XK_Right || keysym == XK_Down
 		|| keysym == XK_Up)
 		translate(keysym, env);
-    printf("Keypress: %d\n", keysym);
+	else if (keysym == XK_space )
+	{
+		ft_printf("Space bar!/n");
+		switch_projection(env);
+	}
+    ft_printf("Keypress: %d\n", keysym);
 	draw(env);
     return (0);
 }
