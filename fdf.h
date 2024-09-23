@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 11:26:42 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:51:19 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_camera
 	double	x_angle;
 	double	y_angle;
 	double	z_angle;
-	float	z_height;
 	int		x_offset;
 	int		y_offset;
 	int		iso;

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 11:13:15 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:10:14 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	initialize_camera(t_fdf *env)
 	camera->x_angle = -0.615472907;
 	camera->y_angle = -0.523599;
 	camera->z_angle = 0.615472907;
-	camera->z_height = 1;
 	camera->x_offset = 0;
 	camera->y_offset = 0;
 	camera->iso = 1;

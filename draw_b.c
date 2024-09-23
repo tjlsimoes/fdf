@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:17:21 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 10:46:21 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:09:25 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ t_point	project(int x, int y, t_fdf *env)
 	point.colour = env->map->array[y][x][1];
 	point.x = x * env->camera->zoom;
 	point.y = y * env->camera->zoom;
-	point.z *= env->camera->zoom / env->camera->z_height;
+	point.z *= env->camera->zoom;
 	point.x -= (env->map->width * env->camera->zoom) / 2;
 	point.y -= (env->map->height * env->camera->zoom) / 2;
 	rotate_x(&point.y, &point.z, env->camera->x_angle);
 	rotate_y(&point.x, &point.z, env->camera->y_angle);
 	rotate_z(&point.x, &point.y, env->camera->z_angle);
 	point.x += WINDOW_WIDTH / 2 + env->camera->x_offset;
-	point.y += (WINDOW_HEIGHT + env->map->height / 2 * env->camera->zoom) / 2
-		+ env->camera->y_offset;
+	point.y += WINDOW_HEIGHT / 2 + env->camera->y_offset;
 	return (point);
 }
