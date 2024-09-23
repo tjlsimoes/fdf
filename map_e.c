@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_e.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 13:19:06 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:23:19 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	map_fd_open_array_init(t_fdf *env, char *file_path)
 {
 	env->file_fd = open(file_path, O_RDONLY);
 	if (env->file_fd == -1)
-		error_close_window(env, "Unable to open file.", 1);
+		error_close_window(env, "Unable to open file.");
 	env->map->array = (int ***)ft_calloc(1, sizeof(int **) * env->map->height);
 	if (!env->map->array)
-		error_close_window(env, "Unable to allocate memory for map array.", 1);
+		error_close_window(env, "Unable to allocate memory for map array.");
 }
 
 void	row_error_array_free(t_fdf *env, int i, char *line)
@@ -28,5 +28,5 @@ void	row_error_array_free(t_fdf *env, int i, char *line)
 	free_map_array_width(env, i, env->map->width);
 	close_call_error(env,
 		"Error map array row (mrm alloc) and close file.",
-		"Unable to allocate memory for map array row,", 1);
+		"Unable to allocate memory for map array row,");
 }

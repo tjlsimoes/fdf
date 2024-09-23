@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 10:07:30 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:20:43 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_map_height(t_fdf *env, char *file_path)
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (env->file_fd == -1)
-		error_close_window(env, "Unable to open file.", 1);
+		error_close_window(env, "Unable to open file.");
 	height = 0;
 	line = get_next_line(env->file_fd);
 	while (line)
@@ -32,9 +32,9 @@ void	set_map_height(t_fdf *env, char *file_path)
 	free(line);
 	line = NULL;
 	if (close(env->file_fd) < 0)
-		error_close_window(env, "Unable to close file.", 1);
+		error_close_window(env, "Unable to close file.");
 	else if (height == 0)
-		error_close_window(env, "Invalid map: zero height.", 1);
+		error_close_window(env, "Invalid map: zero height.");
 	env->map->height = height;
 }
 
@@ -47,16 +47,16 @@ void	set_map_width(t_fdf *env, char *file_path)
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (env->file_fd == -1)
-		error_close_window(env, "Unable to open file.", 1);
+		error_close_window(env, "Unable to open file.");
 	width = 0;
 	line = get_next_line(env->file_fd);
 	width = get_nbr_substrings(line, ' ');
 	width--;
 	check_const_width(env, line, width);
 	if (close(env->file_fd) < 0)
-		error_close_window(env, "Unable to close file.", 1);
+		error_close_window(env, "Unable to close file.");
 	else if (width == 0)
-		error_close_window(env, "Invalid map: zero width initial line.", 1);
+		error_close_window(env, "Invalid map: zero width initial line.");
 	env->map->width = width;
 }
 
@@ -92,8 +92,8 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 			cell_error_array_free(env, row, row_nbr, k);
 			cell_error_split_res_free(values, k, width);
 			close_call_error(env,
-				"Error array cell init (mem alloc) and file close.",
-				"Error array cell init: memory allocation.", 1);
+				"Error array cell init: mem alloc and file close.",
+				"Error array cell init: memory allocation.");
 		}
 		row[k][0] = ft_atoi(values[k]);
 		array_cell_colour_init(values[k], row, &k);
@@ -126,7 +126,7 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 	}
 	free_gnl_static(line, env->file_fd);
 	if (close(env->file_fd) < 0)
-		error_close_window(env, "Unable to close file.", 1);
+		error_close_window(env, "Unable to close file.");
 }
 
 void	initialize_map(t_fdf *env, char *file_path)
@@ -134,7 +134,7 @@ void	initialize_map(t_fdf *env, char *file_path)
 	env->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!env->map)
 		error_close_window(env,
-			"Unable to allocate memory for map variable.", 1);
+			"Unable to allocate memory for map variable.");
 	set_map_height(env, file_path);
 	set_map_width(env, file_path);
 	initialize_map_array(env, file_path);

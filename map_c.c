@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/08/02 12:52:52 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:22:53 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_const_width(t_fdf *env, char *line, int width)
 	free(line);
 	line = NULL;
 	if (difference_q)
-		error_close_window(env, "Invalid map: lines with unequal width.", 1);
+		error_close_window(env, "Invalid map: lines with unequal width.");
 }
 
 // What would happen if:

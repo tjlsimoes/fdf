@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 10:50:16 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:26:42 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ typedef struct s_point
 }	t_point;
 
 // Error handling
-void	ft_error(char *error_msg, int sys_error);
-void	error_close_window(t_fdf *env, char *error_msg, int sys_error);
+void	error_close_window(t_fdf *env, char *error_msg);
 
 // Environment initialization
 t_fdf	*initialize_env(char *str);
@@ -87,7 +86,7 @@ void	initialize_camera(t_fdf *env);
 int		close_window(t_fdf *env);
 void	free_display_env(t_fdf *env);
 void	img_free(t_alt_img *img);
-void	error_img_close_window(t_fdf *env, char *error_msg, int sys_error);
+void	error_img_close_window(t_fdf *env);
 char	*set_title(t_fdf *env, char *str);
 
 // Map initialization
@@ -103,7 +102,7 @@ void	free_map_array_width(t_fdf *env, int i, int width);
 void	free_map_array_row(int **row, int i);
 void	free_gnl_static(char *line, int file_fd);
 void	free_split_result(char **values, int width);
-void	print_array(t_fdf *env);
+// void	print_array(t_fdf *env);
 
 int		get_nbr_substrings(char const *s, char c);
 void	check_const_width(t_fdf *env, char *line, int width);
@@ -112,7 +111,7 @@ void	split_error(t_fdf *env, int row_nbr, char *line);
 void	cell_error_array_free(t_fdf *env, int **row, int row_nbr, int k);
 void	cell_error_split_res_free(char	**values, int k, int width);
 void	close_call_error(t_fdf *env, char *close_error_msg,
-			char *error_msg, int sys_error);
+			char *error_msg);
 int		ft_atoi_rgb(char *str, int str_base);
 void	array_cell_colour_init(char *cell, int **row, int *k);
 

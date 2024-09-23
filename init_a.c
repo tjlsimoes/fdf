@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 13:04:12 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/16 13:27:01 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:27:47 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	img_free(t_alt_img *img)
 	free(img);
 }
 
-void	error_img_close_window(t_fdf *env, char *error_msg, int sys_error)
+void	error_img_close_window(t_fdf *env)
 {
 	mlx_destroy_window(env->mlx, env->win);
 	mlx_destroy_display(env->mlx);
 	free(env);
-	ft_error(error_msg, sys_error);
+	ft_putstr_fd("Unable to create image.", 2);
 }
 
 char	*set_title(t_fdf *env, char *str)
@@ -54,7 +54,7 @@ char	*set_title(t_fdf *env, char *str)
 	if (!title)
 	{
 		free_display_env(env);
-		ft_error("Unable to allocate memory for title.", 1);
+		ft_putstr_fd("Unable to allocate memory for title.", 2);
 	}
 	return (title);
 }

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 10:35:09 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:13:15 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_fdf	*initialize_env(char *str)
 
 	env = (t_fdf *)ft_calloc(1, sizeof(t_fdf));
 	if (!env)
-		ft_error("Unable to allocate memory for env variable.", 1);
+		ft_putstr_fd("Unable to allocate memory for env variable.", 2);
 	env->mlx = mlx_init();
 	if (!env->mlx)
 	{
 		free(env);
-		ft_error("Unable to create display.", 1);
+		ft_putstr_fd("Unable to create display.", 2);
 	}
 	title = set_title(env, str);
 	env->win = mlx_new_window(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, title);
@@ -32,12 +32,12 @@ t_fdf	*initialize_env(char *str)
 	if (!env->win)
 	{
 		free_display_env(env);
-		ft_error("Unable to create window.", 1);
+		ft_putstr_fd("Unable to create window.", 2);
 	}
 	env->map = NULL;
 	env->img = mlx_new_image(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!env->img)
-		error_img_close_window(env, "Unable to create image.", 1);
+		error_img_close_window(env);
 	return (env);
 }
 
@@ -62,7 +62,7 @@ void	initialize_camera(t_fdf *env)
 		free(env->mlx);
 		free(env->map);
 		free(env);
-		ft_error("Error initializing camera", 1);
+		ft_putstr_fd("Error initializing camera", 2);
 	}
 	camera->zoom = min(WINDOW_WIDTH / env->map->width / 2,
 			WINDOW_HEIGHT / env->map->height / 2);
@@ -90,6 +90,6 @@ int	main(int argc, char **argv)
 		mlx_loop(env->mlx);
 	}
 	else
-		ft_printf("Correct Usage: ./fdf <file_name>"); // Should be error output.
+		ft_putstr_fd("Correct Usage: ./fdf <file_name>", 2);
 	return (0);
 }
