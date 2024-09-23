@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 10:50:06 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:35:09 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,14 @@ t_fdf	*initialize_env(char *str)
 	return (env);
 }
 
-// Addition
-
-static int	ft_min(int a, int b)
+static int	min(int a, int b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-static void	initialize_camera(t_fdf *env)
+void	initialize_camera(t_fdf *env)
 {
 	t_camera	*camera;
 
@@ -66,7 +64,7 @@ static void	initialize_camera(t_fdf *env)
 		free(env);
 		ft_error("Error initializing camera", 1);
 	}
-	camera->zoom = ft_min(WINDOW_WIDTH / env->map->width / 2,
+	camera->zoom = min(WINDOW_WIDTH / env->map->width / 2,
 			WINDOW_HEIGHT / env->map->height / 2);
 	camera->x_angle = -0.615472907;
 	camera->y_angle = -0.523599;
@@ -87,16 +85,11 @@ int	main(int argc, char **argv)
 		env = initialize_env(argv[1]);
 		initialize_map(env, argv[1]);
 		initialize_camera(env);
-
 		set_hooks(env);
 		draw(env);
-
-		print_array(env); /////////
-	
 		mlx_loop(env->mlx);
-		// error_close_window(env, "Mem leak check", 1);
 	}
 	else
-		ft_printf("Correct Usage: ./fdf <file_name>");
+		ft_printf("Correct Usage: ./fdf <file_name>"); // Should be error output.
 	return (0);
 }

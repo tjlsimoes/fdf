@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:23:30 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 13:48:45 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:21:46 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	array_cell_colour_init(char *cell, int **row, int *k)
 	if (ft_strchr(cell, ','))
 		row[*k][1] = ft_atoi_rgb(ft_strchr(cell, ',') + 1, 16);
 	else
-		row[*k][1] = RED_PIXEL;
+		row[*k][1] = RED;
 	*k += 1;
 }

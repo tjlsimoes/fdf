@@ -6,7 +6,7 @@
 #    By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/26 18:01:17 by tjorge-l          #+#    #+#              #
-#    Updated: 2024/09/17 13:19:13 by tjorge-l         ###   ########.fr        #
+#    Updated: 2024/09/23 10:46:47 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ DEBUG_FLAGS = -g
 
 SRC := main.c error.c init_a.c \
  map_a.c map_b.c map_c.c map_d.c  map_e.c \
- draw.c line_algorithm.c ft_atoi_rgb.c \
- hooks.c
+ draw_a.c draw_b.c line_algorithm.c ft_atoi_rgb.c \
+ hooks_a.c hooks_b.c
 OBJ := $(SRC:.c=.o)
 
 all: $(NAME)

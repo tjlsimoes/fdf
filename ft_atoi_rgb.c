@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:01:45 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 13:29:12 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:51:12 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	is_uppercase_q(char c)
 
 static int	get_idx(char c)
 {
-	char *hex_base_chars;
-	int	i;
+	char	*hex_base_chars;
+	int		i;
 
 	i = 0;
 	hex_base_chars = "0123456789abcdef";
@@ -53,9 +53,8 @@ static int	valid_string(char *str, int str_base)
 
 int	ft_atoi_rgb(char *str, int str_base)
 {
-
-	int nbr;
-	int i;
+	int	nbr;
+	int	i;
 
 	if (!str || !str_base)
 		return (0);

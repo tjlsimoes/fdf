@@ -6,11 +6,27 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:47:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 11:21:03 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:27:10 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	update_x(t_point *a, int dif)
+{
+	if (dif > 0)
+		a->x += 1;
+	else
+		a->x -= 1;
+}
+
+void	update_y(t_point *a, int dif)
+{
+	if (dif > 0)
+		a->y += 1;
+	else
+		a->y -= 1;
+}
 
 void	slope_less_than_one(t_fdf *env, t_point a, t_point b)
 {
@@ -25,19 +41,12 @@ void	slope_less_than_one(t_fdf *env, t_point a, t_point b)
 	p = 2 * abs(dy) - abs(dx);
 	while (++i < abs(dx))
 	{
-		// ft_printf("Less! a.x = %d, a.y = %d b.x = %d, b.y = %d, i = %d ", a.x, a.y, b.x, b.y, i);
-		if (dx > 0)
-			a.x += 1;
-		else
-			a.x -= 1;
+		update_x(&a, dx);
 		if (p < 0)
 			p = p + 2 * abs(dy);
 		else
 		{
-			if (dy > 0)
-				a.y += 1;
-			else
-				a.y -= 1;
+			update_y(&a, dy);
 			p = p + 2 * abs(dy) - 2 * abs(dx);
 		}
 		img_pix_put(env, a.x, a.y, a.colour);
@@ -57,19 +66,12 @@ void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b)
 	p = 2 * abs(dx) - abs(dy);
 	while (++i < abs(dy))
 	{
-		// ft_printf("Bigger! a.x = %d, a.y = %d b.x = %d, b.y = %d, i = %d ", a.x, a.y, b.x, b.y, i);
-		if (dy > 0)
-			a.y += 1;
-		else
-			a.y -= 1;
+		update_y(&a, dy);
 		if (p < 0)
 			p = p + 2 * abs(dx);
 		else
 		{
-			if (dx > 0)
-				a.x += 1;
-			else
-				a.x -= 1;
+			update_x(&a, dx);
 			p = p + 2 * abs(dx) - 2 * abs(dy);
 		}
 		img_pix_put(env, a.x, a.y, a.colour);

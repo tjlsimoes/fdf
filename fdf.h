@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/17 13:39:48 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/23 10:50:16 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include <stdio.h>
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
-
-// Additions
+# define RED 0xFF0000
 
 typedef struct s_camera
 {
@@ -38,13 +37,11 @@ typedef struct s_camera
 	int		iso;
 }				t_camera;
 
-
 typedef struct s_map
 {
 	int	height;
 	int	width;
 	int	***array;
-	//
 }	t_map;
 
 typedef struct s_alt_img
@@ -74,9 +71,9 @@ typedef struct s_fdf
 typedef struct s_point
 {
 	int	x;
-	int y;
-	int z;
-	int colour;
+	int	y;
+	int	z;
+	int	colour;
 }	t_point;
 
 // Error handling
@@ -85,6 +82,7 @@ void	error_close_window(t_fdf *env, char *error_msg, int sys_error);
 
 // Environment initialization
 t_fdf	*initialize_env(char *str);
+void	initialize_camera(t_fdf *env);
 
 int		close_window(t_fdf *env);
 void	free_display_env(t_fdf *env);
@@ -95,7 +93,8 @@ char	*set_title(t_fdf *env, char *str);
 // Map initialization
 void	initialize_map(t_fdf *env, char *file_path);
 void	initialize_map_array(t_fdf *env, char *file_path);
-void	initialize_map_array_cell(t_fdf *env, int row_nbr, char *line, int width);
+void	initialize_map_array_cell(t_fdf *env, int row_nbr,
+			char *line, int width);
 
 void	set_map_height(t_fdf *env, char *file_path);
 void	set_map_width(t_fdf *env, char *file_path);
@@ -112,7 +111,8 @@ void	check_const_width(t_fdf *env, char *line, int width);
 void	split_error(t_fdf *env, int row_nbr, char *line);
 void	cell_error_array_free(t_fdf *env, int **row, int row_nbr, int k);
 void	cell_error_split_res_free(char	**values, int k, int width);
-void	close_call_error(t_fdf *env, char *close_error_msg, char *error_msg, int sys_error);
+void	close_call_error(t_fdf *env, char *close_error_msg,
+			char *error_msg, int sys_error);
 int		ft_atoi_rgb(char *str, int str_base);
 void	array_cell_colour_init(char *cell, int **row, int *k);
 
@@ -123,36 +123,23 @@ void	row_error_array_free(t_fdf *env, int i, char *line);
 int		draw(t_fdf *env);
 
 void	img_pix_put(t_fdf *env, int x, int y, int colour);
-void	draw_points(t_fdf *env);
 void	draw_map(t_fdf *env);
 void	draw_line(t_fdf *env, t_point a, t_point b);
 
+void	rotate_x(int *y, int *z, double x_angle);
+void	rotate_y(int *x, int *z, double y_angle);
+void	rotate_z(int *x, int *y, double z_angle);
+
+t_point	project(int x, int y, t_fdf *env);
 
 // Line Algorithm
 void	slope_less_than_one(t_fdf *env, t_point a, t_point b);
 void	slope_bigger_than_one(t_fdf *env, t_point a, t_point b);
-
-	//Temporary Drawing
-# define RED_PIXEL 0xFF0000
-# define GREEN_PIXEL 0xFF00
-# define WHITE_PIXEL 0xFFFFFF
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int width;
-	int	height;
-	int colour;
-}	t_rect;
-
-int		render(t_fdf *env);
-void	render_background(t_fdf *env, int colour);
-int		render_rect(t_fdf *env, t_rect rect);
+void	update_x(t_point *a, int dif);
+void	update_y(t_point *a, int dif);
 
 // Hook handling
 void	set_hooks(t_fdf *env);
-int		handle_no_event();
 int		handle_mouse_click(int button, int x, int y, void *params);
 int		handle_keypress(int keysym, void *params);
 void	zoom(int button, t_fdf *env);
