@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 10:19:41 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:37:03 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_point
 }	t_point;
 
 // Error handling
+void	error(char *error_msg);
 void	error_close_window(t_fdf *env, char *error_msg);
 
 // Environment initialization

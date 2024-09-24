@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 11:23:08 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:29:58 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_fdf	*initialize_env(char *str)
 
 	env = (t_fdf *)ft_calloc(1, sizeof(t_fdf));
 	if (!env)
-		ft_putstr_fd("Unable to allocate memory for env variable.", 2);
+		error("Unable to allocate memory for env variable.");
 	env->mlx = mlx_init();
 	if (!env->mlx)
 	{
 		free(env);
-		ft_putstr_fd("Unable to create display.", 2);
+		error("Unable to create display.");
 	}
 	title = set_title(env, str);
 	env->win = mlx_new_window(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, title);
@@ -32,7 +32,7 @@ t_fdf	*initialize_env(char *str)
 	if (!env->win)
 	{
 		free_display_env(env);
-		ft_putstr_fd("Unable to create window.", 2);
+		error("Unable to create window.");
 	}
 	env->map = NULL;
 	env->img = mlx_new_image(env->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -62,7 +62,7 @@ void	initialize_camera(t_fdf *env)
 		free(env->mlx);
 		free(env->map);
 		free(env);
-		ft_putstr_fd("Error initializing camera", 2);
+		error("Error initializing camera");
 	}
 	camera->zoom = min(WINDOW_WIDTH / env->map->width / 2,
 			WINDOW_HEIGHT / env->map->height / 2);
