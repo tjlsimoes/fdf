@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 10:06:26 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 10:40:58 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:31:43 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ int	handle_keypress(int keysym, void *params)
 	else if (keysym == XK_Left || keysym == XK_Right || keysym == XK_Down
 		|| keysym == XK_Up)
 		translate(keysym, env);
+	else if (keysym == XK_1 || keysym == XK_2 || keysym == XK_3
+		|| keysym == XK_4 || keysym == XK_5 || keysym == XK_6)
+		change_angle(keysym, env);
 	else if (keysym == XK_space)
-	{
 		switch_projection(env);
-	}
+	else if (keysym == XK_0)
+		reset(env);
 	draw(env);
 	return (0);
 }

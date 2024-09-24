@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 12:51:19 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:19:41 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,10 @@ void	update_y(t_point *a, int dif);
 void	set_hooks(t_fdf *env);
 int		handle_mouse_click(int button, int x, int y, void *params);
 int		handle_keypress(int keysym, void *params);
+void	change_angle(int keysym, t_fdf *env);
 void	zoom(int button, t_fdf *env);
 void	translate(int keycode, t_fdf *env);
 void	switch_projection(t_fdf *env);
+void	reset(t_fdf *env);
 
 #endif
