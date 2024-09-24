@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 13:04:12 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 11:24:09 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:25:53 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*set_title(t_fdf *env, char *str)
 	{
 		free_display_env(env);
 		ft_putstr_fd("Unable to allocate memory for title.", 2);
+		exit(1);
 	}
 	return (title);
 }
