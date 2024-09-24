@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 11:22:53 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:47:12 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ int	get_nbr_substrings(char const *s, char c)
 		i++;
 	}
 	return (count);
+}
+
+void	update_width(t_fdf *env, char *line, int width)
+{
+	int	nbr_columns;
+
+	while (line)
+	{
+		free(line);
+		line = NULL;
+		line = get_next_line(env->file_fd);
+		nbr_columns = get_nbr_substrings(line, ' ') - 1;
+		if (nbr_columns > width && nbr_columns != -1)
+			width = nbr_columns;
+	}
+	free(line);
+	line = NULL;
+	env->map->width = width;
 }
 
 void	check_const_width(t_fdf *env, char *line, int width)

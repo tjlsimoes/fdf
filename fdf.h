@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 11:37:03 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:46:30 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	free_split_result(char **values, int width);
 // void	print_array(t_fdf *env);
 
 int		get_nbr_substrings(char const *s, char c);
+void	update_width(t_fdf *env, char *line, int width);
 void	check_const_width(t_fdf *env, char *line, int width);
 
 void	split_error(t_fdf *env, int row_nbr, char *line);

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 11:17:44 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:03:13 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	set_map_width(t_fdf *env, char *file_path)
 	line = get_next_line(env->file_fd);
 	width = get_nbr_substrings(line, ' ');
 	width--;
-	check_const_width(env, line, width);
+	update_width(env, line, width);
 	if (close(env->file_fd) < 0)
 		error_close_window(env, "Unable to close file.");
 	else if (width == 0)
@@ -71,21 +71,35 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
+static int	get_split_size(char **split_result)
+{
+	int	i;
+
+	i = 0;
+	if (!split_result)
+		return (i);
+	while (split_result[i])
+		i++;
+	return (i);
+}
+
 void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 									char *line, int width)
 {
 	char	**values;
 	int		k;
 	int		**row;
+	int		split_size;
 
 	k = 0;
 	row = env->map->array[row_nbr];
 	values = ft_split(line, ' ');
 	if (!values)
 		split_error(env, row_nbr, line);
+	split_size = get_split_size(values);
 	while (k < width)
 	{
-		row[k] = (int *)malloc(sizeof(int) * 2);
+		row[k] = (int *)ft_calloc(1, sizeof(int) * 2);
 		if (!row[k])
 		{
 			free_gnl_static(line, env->file_fd);
@@ -95,10 +109,15 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 				"Error array cell init: mem alloc and file close.",
 				"Error array cell init: memory allocation.");
 		}
-		row[k][0] = ft_atoi(values[k]);
-		array_cell_colour_init(values[k], row, &k);
+		if (k < split_size)
+		{
+			row[k][0] = ft_atoi(values[k]);
+			array_cell_colour_init(values[k], row, &k);
+		}
+		else
+			k++;
 	}
-	free_split_result(values, width);
+	free_split_result(values, --split_size);
 }
 
 // Possible need to safeguard for ft_atoi(values[]) == 0?
