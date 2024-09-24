@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:03:13 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:30:10 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ void	set_map_width(t_fdf *env, char *file_path)
 // get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 // Hence, width--.
 
-static int	get_split_size(char **split_result)
-{
-	int	i;
-
-	i = 0;
-	if (!split_result)
-		return (i);
-	while (split_result[i])
-		i++;
-	return (i);
-}
-
 void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 									char *line, int width)
 {
@@ -102,20 +90,13 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 		row[k] = (int *)ft_calloc(1, sizeof(int) * 2);
 		if (!row[k])
 		{
-			free_gnl_static(line, env->file_fd);
+			free_gnl_split(line, env, k, values);
 			cell_error_array_free(env, row, row_nbr, k);
-			cell_error_split_res_free(values, k, width);
 			close_call_error(env,
 				"Error array cell init: mem alloc and file close.",
 				"Error array cell init: memory allocation.");
 		}
-		if (k < split_size)
-		{
-			row[k][0] = ft_atoi(values[k]);
-			array_cell_colour_init(values[k], row, &k);
-		}
-		else
-			k++;
+		init_cell(row, values, split_size, &k);
 	}
 	free_split_result(values, --split_size);
 }

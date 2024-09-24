@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 12:46:30 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:27:46 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,14 @@ void	initialize_map(t_fdf *env, char *file_path);
 void	initialize_map_array(t_fdf *env, char *file_path);
 void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 			char *line, int width);
+void	init_cell(int **row, char **split_res,
+			int split_size, int *k);
 
 void	set_map_height(t_fdf *env, char *file_path);
 void	set_map_width(t_fdf *env, char *file_path);
 
+void	free_gnl_split(char *line, t_fdf *fdf, int k,
+			char **values);
 void	free_map_array_width(t_fdf *env, int i, int width);
 void	free_map_array_row(int **row, int i);
 void	free_gnl_static(char *line, int file_fd);
@@ -108,9 +112,10 @@ int		get_nbr_substrings(char const *s, char c);
 void	update_width(t_fdf *env, char *line, int width);
 void	check_const_width(t_fdf *env, char *line, int width);
 
+int		get_split_size(char **split_result);
 void	split_error(t_fdf *env, int row_nbr, char *line);
 void	cell_error_array_free(t_fdf *env, int **row, int row_nbr, int k);
-void	cell_error_split_res_free(char	**values, int k, int width);
+void	cell_error_split_res_free(char	**values, int k);
 void	close_call_error(t_fdf *env, char *close_error_msg,
 			char *error_msg);
 int		ft_atoi_rgb(char *str, int str_base);

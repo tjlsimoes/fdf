@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:07:24 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 11:21:23 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:32:40 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	free_map_array_row(int **row, int i)
 		j++;
 	}
 	free(row);
+}
+
+void	free_gnl_split(char *line, t_fdf *fdf, int k, char **values)
+{
+	free_gnl_static(line, fdf->file_fd);
+	cell_error_split_res_free(values, k);
 }
 
 void	free_gnl_static(char *line, int file_fd)

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:23:30 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:00:25 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:28:03 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	cell_error_array_free(t_fdf *env, int **row, int row_nbr, int k)
 	free_map_array_width(env, row_nbr, env->map->width);
 }
 
-void	cell_error_split_res_free(char	**values, int k, int width)
+void	cell_error_split_res_free(char	**values, int k)
 {
-	while (k <= width)
+	int	split_size;
+
+	split_size = get_split_size(values);
+	while (k < split_size)
 		free(values[k++]);
 	free(values);
 }

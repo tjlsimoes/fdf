@@ -6,11 +6,23 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 12:47:12 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:30:30 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int	get_split_size(char **split_result)
+{
+	int	i;
+
+	i = 0;
+	if (!split_result)
+		return (i);
+	while (split_result[i])
+		i++;
+	return (i);
+}
 
 int	get_nbr_substrings(char const *s, char c)
 {
