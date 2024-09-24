@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:41:10 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 10:19:33 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:27:28 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	switch_projection(t_fdf *env)
 {
 	if (env->camera->iso)
 	{
-		env->camera->x_angle = -0.523599;
-		env->camera->y_angle = -0.261799;
+		env->camera->x_angle = 0;
+		env->camera->y_angle = 0;
 		env->camera->z_angle = 0;
 	}
 	else
