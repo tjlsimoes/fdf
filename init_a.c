@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 13:04:12 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/23 11:27:47 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:24:09 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	error_img_close_window(t_fdf *env)
 {
 	mlx_destroy_window(env->mlx, env->win);
 	mlx_destroy_display(env->mlx);
+	free(env->mlx);
 	free(env);
 	ft_putstr_fd("Unable to create image.", 2);
+	exit(1);
 }
 
 char	*set_title(t_fdf *env, char *str)
