@@ -6,7 +6,7 @@
 #    By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/26 18:01:17 by tjorge-l          #+#    #+#              #
-#    Updated: 2024/09/24 15:25:30 by tjorge-l         ###   ########.fr        #
+#    Updated: 2024/09/24 15:31:26 by tjorge-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -c $< -o $@
 
 clean:
+	cd printf && $(MAKE) clean
+	cd libft && $(MAKE) clean
 	cd mlx_linux && $(MAKE) clean
 	$(RM) $(OBJ)
 
