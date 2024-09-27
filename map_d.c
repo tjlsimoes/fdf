@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:23:30 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:28:03 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:09:54 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ void	array_cell_colour_init(char *cell, int **row, int *k)
 		row[*k][1] = ft_atoi_rgb(ft_strchr(cell, ',') + 1, 16);
 	else
 		row[*k][1] = RED;
-	*k += 1;
 }

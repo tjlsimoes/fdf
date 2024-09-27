@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_e.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:32:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:11:12 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	init_cell(int **row, char **split_res, int split_size, int *k)
 		row[*k][0] = ft_atoi(split_res[*k]);
 		array_cell_colour_init(split_res[*k], row, k);
 	}
-	else
-		*k += 1;
+	*k += 1;
 }
 
 void	row_error_array_free(t_fdf *env, int i, char *line)
