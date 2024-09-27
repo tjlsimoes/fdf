@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_b.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:07:24 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:32:40 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:02:26 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	free_map_array_row(int **row, int i)
 	free(row);
 }
 
-void	free_gnl_split(char *line, t_fdf *fdf, int k, char **values)
+void	free_gnl_split(char *line, t_fdf *fdf, int split_length, char **values)
 {
 	free_gnl_static(line, fdf->file_fd);
-	cell_error_split_res_free(values, k);
+	free_split_result(values, split_length);
 }
 
 void	free_gnl_static(char *line, int file_fd)
@@ -63,12 +63,12 @@ void	free_gnl_static(char *line, int file_fd)
 	line = NULL;
 }
 
-void	free_split_result(char **values, int width)
+void	free_split_result(char **values, int split_length)
 {
 	int	i;
 
 	i = 0;
-	while (i <= width)
+	while (i <= split_length)
 		free(values[i++]);
 	free(values);
 }

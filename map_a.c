@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:30:10 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:03:25 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 		row[k] = (int *)ft_calloc(1, sizeof(int) * 2);
 		if (!row[k])
 		{
-			free_gnl_split(line, env, k, values);
+			free_gnl_split(line, env, --split_size, values);
 			cell_error_array_free(env, row, row_nbr, k);
 			close_call_error(env,
 				"Error array cell init: mem alloc and file close.",
