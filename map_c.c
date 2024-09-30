@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:38:42 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:55:34 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,27 +76,6 @@ void	update_width(t_fdf *env, char *line, int width)
 	free(line);
 	line = NULL;
 	env->map->width = width;
-}
-
-void	check_const_width(t_fdf *env, char *line, int width)
-{
-	int	difference_q;
-	int	nbr_columns;
-
-	difference_q = 0;
-	while (line)
-	{
-		free(line);
-		line = NULL;
-		line = get_next_line(env->file_fd);
-		nbr_columns = get_nbr_substrings(line, ' ') - 1;
-		if (width != nbr_columns && nbr_columns != -1)
-			difference_q = 1;
-	}
-	free(line);
-	line = NULL;
-	if (difference_q)
-		error_close_window(env, "Invalid map: lines with unequal width.");
 }
 
 // What would happen if:
