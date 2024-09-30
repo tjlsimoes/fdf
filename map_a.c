@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/27 17:03:25 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:32:00 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ void	initialize_map_array(t_fdf *env, char *file_path)
 	}
 	free_gnl_static(line, env->file_fd);
 	if (close(env->file_fd) < 0)
+	{
+		free_map_array_width(env, env->map->height, env->map->width);
 		error_close_window(env, "Unable to close file.");
+	}
 }
 
 void	initialize_map(t_fdf *env, char *file_path)
