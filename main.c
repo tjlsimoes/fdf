@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 11:29:58 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:35:41 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,7 @@ void	initialize_camera(t_fdf *env)
 	if (!camera)
 	{
 		free_map_array_width(env, env->map->height, env->map->width);
-		mlx_destroy_image(env->mlx, env->img);
-		mlx_destroy_window(env->mlx, env->win);
-		mlx_destroy_display(env->mlx);
-		free(env->mlx);
-		free(env->map);
-		free(env);
-		error("Error initializing camera");
+		error_close_window(env, "Error initializing camera");
 	}
 	camera->zoom = min(WINDOW_WIDTH / env->map->width / 2,
 			WINDOW_HEIGHT / env->map->height / 2);
