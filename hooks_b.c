@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:41:10 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 10:44:30 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:48:07 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	translate(int keycode, t_fdf *env)
 	else if (keycode == XK_Up)
 		env->camera->y_offset -= 10;
 	draw(env);
-
 }
 
 void	switch_projection(t_fdf *env)
