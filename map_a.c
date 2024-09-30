@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:34:22 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:45:42 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,13 @@ void	set_map_width(t_fdf *env, char *file_path)
 	else if (width <= 1)
 		error_close_window(env, "Invalid map: invalid width.");
 }
+// No need to account for possibility of initial line value being NULL,
+// as that possibility is already accounted in set_map_height().
 
 // Possible combination of both errors on set_map_height?
 
-// get_map_width() assumes that anything other than spaces between spaces
-// on the first line of the map equates to a number.
-// Obviously this can not be the case.
-// Add a protection further down the road (use of atoi?) in the case
-// it is not a number or a pair of numbers (number and colour)?
+// Note: get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
 
-// get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
-// Hence, width--.
 
 void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 									char *line, int width)
