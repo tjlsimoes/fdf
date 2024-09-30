@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_e.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/27 17:11:12 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:58:31 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ void	row_error_array_free(t_fdf *env, int i, char *line)
 	close_call_error(env,
 		"Error map array row (mrm alloc) and close file.",
 		"Unable to allocate memory for map array row,");
+}
+
+int	check_first_value(char *line)
+{
+	int		length;
+	int		number;
+
+	number = 0;
+	length = ft_strlen(line);
+	if (length > 0 && ft_isdigit(line[0]))
+		number = 1;
+	else if (length >= 1 && is_sign(line[0]) &&
+			ft_isdigit(line[1]))
+		number = 1;
+	return (number);
 }

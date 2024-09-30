@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:56:32 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:58:35 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void	free_split_result(char **values, int split_length);
 
 int		get_nbr_substrings(char const *s, char c);
 void	invalid_first_line(t_fdf *env, char *line);
+int		check_first_value(char *line);
+int		is_sign(char c);
 void	update_width(t_fdf *env, char *line, int width);
 
 int		get_split_size(char **split_result);

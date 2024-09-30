@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 15:03:25 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:38:34 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	get_nbr_substrings(char const *s, char c)
 		i++;
 	}
 	return (count);
+}
+
+int	is_sign(char c)
+{
+	if (c == '+' || c == '-')
+		return (1);
+	return (0);
 }
 
 void	invalid_first_line(t_fdf *env, char *line)
