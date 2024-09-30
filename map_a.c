@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 10:32:00 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:56:46 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	set_map_height(t_fdf *env, char *file_path)
 		error_close_window(env, "Unable to open file.");
 	height = 0;
 	line = get_next_line(env->file_fd);
+	if (!line || !ft_isalnum(line[0]))
+		error_close_window(env, "Invalid first line.");
 	while (line)
 	{
 		free(line);
