@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:28:01 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:38:42 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	update_width(t_fdf *env, char *line, int width)
 			break ;
 		values = ft_split(line, ' ');
 		if (!values)
-			error_close_window(env, "Error: split() mem fail.");
+			error_close_window(env, "update_width(): split() mem fail.");
 		nbr_columns = get_nbr_substrings(line, ' ');
 		if (values[nbr_columns - 1][0] == 12)
 			nbr_columns--;

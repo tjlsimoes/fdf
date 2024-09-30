@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:29:09 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:34:22 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	set_map_width(t_fdf *env, char *file_path)
 	line = get_next_line(env->file_fd);
 	values = ft_split(line, ' ');
 	if (!values)
+	{
+		free_gnl_static(line, env->file_fd);
 		error_close_window(env, "Error set_map_width(): split() mem fail.");
+	}
 	width = get_nbr_substrings(line, ' ');
 	if (values[width - 1][0] == 12)
 		width--;
