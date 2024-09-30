@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:52:40 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:03:02 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	set_map_width(t_fdf *env, char *file_path)
 // Possible combination of both errors on set_map_height?
 
 // Note: get_nbr_substrings(line, ' ') counts the ending \n as a another nbr.
-
 
 void	initialize_map_array_cell(t_fdf *env, int row_nbr,
 									char *line, int width)

@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 14:44:44 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:03:25 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	update_width(t_fdf *env, char *line, int width)
 		if (nbr_columns > width && nbr_columns != -1)
 			width = nbr_columns;
 	}
-	free(line);
 	line = NULL;
 	env->map->width = width;
 }

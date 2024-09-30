@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:50:27 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 10:35:41 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:05:06 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Correct Usage: ./fdf <file_name>", 2);
 	return (0);
 }
+
+// norminette draw_* error.c fdf.h ft_atoi_rgb.c 
+// hooks_* init_a.c line_algorithm.c main.c map_*
+// libft/*.h libft/*.c printf/*.c printf/*.h
