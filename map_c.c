@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 13:30:30 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:28:01 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,23 @@ int	get_nbr_substrings(char const *s, char c)
 
 void	update_width(t_fdf *env, char *line, int width)
 {
-	int	nbr_columns;
+	int		nbr_columns;
+	char	**values;
 
 	while (line)
 	{
 		free(line);
 		line = NULL;
 		line = get_next_line(env->file_fd);
-		nbr_columns = get_nbr_substrings(line, ' ') - 1;
+		if (!line)
+			break ;
+		values = ft_split(line, ' ');
+		if (!values)
+			error_close_window(env, "Error: split() mem fail.");
+		nbr_columns = get_nbr_substrings(line, ' ');
+		if (values[nbr_columns - 1][0] == 12)
+			nbr_columns--;
+		free_split_result(values, get_split_size(values) - 1);
 		if (nbr_columns > width && nbr_columns != -1)
 			width = nbr_columns;
 	}

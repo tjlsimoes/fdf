@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 12:56:46 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:29:09 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,25 @@ void	set_map_width(t_fdf *env, char *file_path)
 {
 	int		width;
 	char	*line;
+	char	**values;
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (env->file_fd == -1)
 		error_close_window(env, "Unable to open file.");
 	width = 0;
 	line = get_next_line(env->file_fd);
+	values = ft_split(line, ' ');
+	if (!values)
+		error_close_window(env, "Error set_map_width(): split() mem fail.");
 	width = get_nbr_substrings(line, ' ');
-	width--;
+	if (values[width - 1][0] == 12)
+		width--;
+	free_split_result(values, get_split_size(values) - 1);
 	update_width(env, line, width);
 	if (close(env->file_fd) < 0)
 		error_close_window(env, "Unable to close file.");
-	else if (width == 0)
-		error_close_window(env, "Invalid map: zero width initial line.");
-	env->map->width = width;
+	else if (width <= 1)
+		error_close_window(env, "Invalid map: invalid width.");
 }
 
 // Possible combination of both errors on set_map_height?
