@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 10:06:26 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 10:31:43 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:44:13 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	handle_keypress(int keysym, void *params)
 		switch_projection(env);
 	else if (keysym == XK_0)
 		reset(env);
-	draw(env);
 	return (0);
 }
 
@@ -48,6 +47,6 @@ int	handle_mouse_click(int button, int x, int y, void *params)
 	if (button == 4 || button == 5)
 		zoom(button, env);
 	else
-		ft_printf("Mouse click: %d, %d %d\n", button, x, y);
+		ft_printf("Not all mouse buttons enabled: button: %d, x: %d y: %d\n", button, x, y);
 	return (0);
 }

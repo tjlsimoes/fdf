@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:41:10 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/24 12:27:28 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:44:30 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	change_angle(int keysym, t_fdf *env)
 		env->camera->z_angle -= 0.5;
 	else if (keysym == XK_6)
 		env->camera->z_angle += 0.5;
+	draw(env);
 }
 
 void	translate(int keycode, t_fdf *env)
@@ -49,6 +50,8 @@ void	translate(int keycode, t_fdf *env)
 		env->camera->y_offset += 10;
 	else if (keycode == XK_Up)
 		env->camera->y_offset -= 10;
+	draw(env);
+
 }
 
 void	switch_projection(t_fdf *env)
@@ -66,6 +69,7 @@ void	switch_projection(t_fdf *env)
 		env->camera->z_angle = 0.615472907;
 	}
 	env->camera->iso = !env->camera->iso;
+	draw(env);
 }
 
 void	reset(t_fdf *env)
@@ -73,5 +77,6 @@ void	reset(t_fdf *env)
 	env->camera->x_angle = -0.615472907;
 	env->camera->y_angle = -0.523599;
 	env->camera->z_angle = 0.615472907;
-	env->camera->iso = !env->camera->iso;
+	env->camera->iso = 1;
+	draw(env);
 }
