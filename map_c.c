@@ -6,7 +6,7 @@
 /*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 13:55:34 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:57:01 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ int	get_nbr_substrings(char const *s, char c)
 		i++;
 	}
 	return (count);
+}
+
+void	invalid_first_line(t_fdf *env, char *line)
+{
+	free_gnl_static(line, env->file_fd);
+	if (close(env->file_fd) < 0)
+		error_close_window(env, "Unable to close file.");
+	error_close_window(env, "Invalid first line.");
 }
 
 void	update_width(t_fdf *env, char *line, int width)

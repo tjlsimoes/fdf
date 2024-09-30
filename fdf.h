@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/27 17:02:09 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:56:32 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void	free_split_result(char **values, int split_length);
 // void	print_array(t_fdf *env);
 
 int		get_nbr_substrings(char const *s, char c);
+void	invalid_first_line(t_fdf *env, char *line);
 void	update_width(t_fdf *env, char *line, int width);
-void	check_const_width(t_fdf *env, char *line, int width);
 
 int		get_split_size(char **split_result);
 void	split_error(t_fdf *env, int row_nbr, char *line);
