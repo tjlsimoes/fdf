@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 15:38:34 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:43:42 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,22 @@ int	get_nbr_substrings(char const *s, char c)
 	return (count);
 }
 
-int	is_sign(char c)
+int	ft_atoi_alt(char *nptr)
 {
-	if (c == '+' || c == '-')
-		return (1);
-	return (0);
+	int		nbr;
+
+    if (!nptr)
+		return (0);
+	nbr = 0;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-')
+		nptr++;
+	else if (*nptr == '+')
+		nptr++;
+	if (*nptr >= '0' && *nptr <= '9')
+		nbr = 1;
+	return (nbr);
 }
 
 void	invalid_first_line(t_fdf *env, char *line)

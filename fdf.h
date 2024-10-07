@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 11:48:58 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 15:58:35 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:41:07 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "X11/X.h"
 # include <stdlib.h>
 # include <stdio.h>
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
 # define RED 0xFF0000
 
 typedef struct s_camera
@@ -110,6 +110,7 @@ void	free_split_result(char **values, int split_length);
 
 int		get_nbr_substrings(char const *s, char c);
 void	invalid_first_line(t_fdf *env, char *line);
+int		ft_atoi_alt(char *nptr);
 int		check_first_value(char *line);
 int		is_sign(char c);
 void	update_width(t_fdf *env, char *line, int width);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/09/30 15:58:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:36:14 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_map_height(t_fdf *env, char *file_path)
 		error_close_window(env, "Unable to open file.");
 	height = 0;
 	line = get_next_line(env->file_fd);
-	if (!line || !check_first_value(line))
+	if (!line || !ft_atoi_alt(line))
 		invalid_first_line(env, line);
 	while (line)
 	{
