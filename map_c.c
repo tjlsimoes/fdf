@@ -6,7 +6,7 @@
 /*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/10/07 15:43:42 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/07 16:30:06 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_atoi_alt(char *nptr)
 {
 	int		nbr;
 
-    if (!nptr)
+	if (!nptr)
 		return (0);
 	nbr = 0;
 	while (ft_isspace(*nptr))
@@ -96,7 +96,7 @@ void	update_width(t_fdf *env, char *line, int width)
 			error_close_window(env, "update_width(): split() mem fail.");
 		}
 		nbr_columns = get_nbr_substrings(line, ' ');
-		if (values[nbr_columns - 1][0] == 12)
+		if (values[nbr_columns - 1][0] == 10)
 			nbr_columns--;
 		free_split_result(values, get_split_size(values) - 1);
 		if (nbr_columns > width && nbr_columns != -1)
