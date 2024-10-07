@@ -26,17 +26,17 @@ void	zoom(int button, t_fdf *env)
 void	change_angle(int keysym, t_fdf *env)
 {
 	if (keysym == XK_1)
-		env->camera->x_angle -= 0.5;
+		env->camera->x_angle -= 0.1;
 	else if (keysym == XK_2)
-		env->camera->x_angle += 0.5;
+		env->camera->x_angle += 0.1;
 	else if (keysym == XK_3)
-		env->camera->y_angle -= 0.5;
+		env->camera->y_angle -= 0.1;
 	else if (keysym == XK_4)
-		env->camera->y_angle += 0.5;
+		env->camera->y_angle += 0.1;
 	else if (keysym == XK_5)
-		env->camera->z_angle -= 0.5;
+		env->camera->z_angle -= 0.1;
 	else if (keysym == XK_6)
-		env->camera->z_angle += 0.5;
+		env->camera->z_angle += 0.1;
 	draw(env);
 }
 
@@ -63,9 +63,9 @@ void	switch_projection(t_fdf *env)
 	}
 	else
 	{
-		env->camera->x_angle = -0.615472907;
-		env->camera->y_angle = -0.523599;
-		env->camera->z_angle = 0.615472907;
+		env->camera->x_angle = -0.971000;
+		env->camera->y_angle = 0.700000;
+		env->camera->z_angle = -0.300000;
 	}
 	env->camera->iso = !env->camera->iso;
 	draw(env);
@@ -73,9 +73,9 @@ void	switch_projection(t_fdf *env)
 
 void	reset(t_fdf *env)
 {
-	env->camera->x_angle = -0.615472907;
-	env->camera->y_angle = -0.523599;
-	env->camera->z_angle = 0.615472907;
+	env->camera->x_angle = -0.971000;
+	env->camera->y_angle = 0.700000;
+	env->camera->z_angle = -0.300000;
 	env->camera->iso = 1;
 	draw(env);
 }

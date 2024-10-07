@@ -60,9 +60,9 @@ void	initialize_camera(t_fdf *env)
 	}
 	camera->zoom = min(WINDOW_WIDTH / env->map->width / 2,
 			WINDOW_HEIGHT / env->map->height / 2);
-	camera->x_angle = -0.615472907;
-	camera->y_angle = -0.523599;
-	camera->z_angle = 0.615472907;
+	camera->x_angle = -0.971000;
+	camera->y_angle = 0.700000;
+	camera->z_angle = -0.300000;
 	camera->x_offset = 0;
 	camera->y_offset = 0;
 	camera->iso = 1;
