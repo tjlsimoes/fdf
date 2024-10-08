@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:08:54 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/10/07 16:30:06 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/08 10:30:26 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	invalid_first_line(t_fdf *env, char *line)
 void	update_width(t_fdf *env, char *line, int width)
 {
 	int		nbr_columns;
-	char	**values;
 
 	while (line)
 	{
@@ -89,16 +88,9 @@ void	update_width(t_fdf *env, char *line, int width)
 		line = get_next_line(env->file_fd);
 		if (!line)
 			break ;
-		values = ft_split(line, ' ');
-		if (!values)
-		{
-			free_gnl_static(line, env->file_fd);
-			error_close_window(env, "update_width(): split() mem fail.");
-		}
 		nbr_columns = get_nbr_substrings(line, ' ');
-		if (values[nbr_columns - 1][0] == 10)
+		if (any_q(10, line))
 			nbr_columns--;
-		free_split_result(values, get_split_size(values) - 1);
 		if (nbr_columns > width && nbr_columns != -1)
 			width = nbr_columns;
 	}

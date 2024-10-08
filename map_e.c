@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_e.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:37:51 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/10/07 15:42:45 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/08 10:26:26 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,22 @@ void	row_error_array_free(t_fdf *env, int i, char *line)
 	close_call_error(env,
 		"Error map array row (mrm alloc) and close file.",
 		"Unable to allocate memory for map array row,");
+}
+
+int	any_q(char c, char *set)
+{
+	int		i;
+	char	*chars;
+
+	i = 0;
+	if (!set || !c)
+		return (0);
+	chars = (char *)set;
+	while (chars[i] != '\0')
+	{
+		if (chars[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

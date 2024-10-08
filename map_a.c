@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjorge-l < tjorge-l@student.42lisboa.co    +#+  +:+       +#+        */
+/*   By: tjorge-l <tjorge-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 10:47:55 by tjorge-l          #+#    #+#             */
-/*   Updated: 2024/10/07 16:26:56 by tjorge-l         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:04:05 by tjorge-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,19 @@ void	set_map_width(t_fdf *env, char *file_path)
 {
 	int		width;
 	char	*line;
-	char	**values;
 
 	env->file_fd = open(file_path, O_RDONLY);
 	if (env->file_fd == -1)
 		error_close_window(env, "Unable to open file.");
 	width = 0;
 	line = get_next_line(env->file_fd);
-	values = ft_split(line, ' ');
-	if (!values)
-	{
-		free_gnl_static(line, env->file_fd);
-		error_close_window(env, "Error set_map_width(): split() mem fail.");
-	}
 	width = get_nbr_substrings(line, ' ');
-	if (values[width - 1][0] == 10)
+	if (any_q(10, line) && width != 1)
 		width--;
-	free_split_result(values, get_split_size(values) - 1);
 	update_width(env, line, width);
 	if (close(env->file_fd) < 0)
 		error_close_window(env, "Unable to close file.");
-	else if (width <= 1)
+	else if (width < 1)
 		error_close_window(env, "Invalid map: invalid width.");
 }
 // No need to account for possibility of initial line value being NULL,
